@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>envctl — Git for your secrets | P2P secrets management</title>
+    <meta name="title" content="envctl — Git for your secrets | P2P secrets management">
+    <meta name="description" content="Peer-to-peer secrets management for development teams. Post-quantum encryption, signed audit trail, no cloud required. Sync .env files securely across your team.">
+    <meta name="keywords" content="secrets management, environment variables, dotenv, .env, encryption, P2P, peer-to-peer, post-quantum, developer tools, CLI, devops, security">
+    <meta name="author" content="uRadical">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/">
+    <meta property="og:title" content="envctl — Git for your secrets">
+    <meta property="og:description" content="Peer-to-peer secrets management for development teams. Post-quantum encryption, signed audit trail, no cloud required.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="envctl">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://envctl.dev/">
+    <meta name="twitter:title" content="envctl — Git for your secrets">
+    <meta name="twitter:description" content="Peer-to-peer secrets management for development teams. Post-quantum encryption, signed audit trail, no cloud required.">
+    <meta name="twitter:image" content="https://envctl.dev/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+    
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "envctl",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "macOS, Linux, Windows",
+        "description": "Peer-to-peer secrets management for development teams. Post-quantum encryption, signed audit trail, no cloud required.",
+        "url": "https://envctl.dev",
+        "downloadUrl": "https://github.com/uradical/envctl/releases",
+        "softwareVersion": "1.0",
+        "author": {
+            "@type": "Organization",
+            "name": "uRadical",
+            "url": "https://uradical.io"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "keywords": "secrets management, environment variables, encryption, P2P, developer tools",
+        "license": "https://opensource.org/licenses/MIT"
+    }
+    </script>
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="#" class="nav-logo" aria-label="envctl home">
+            <img src="logo.svg" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#install">Install</a>
+            <a href="#docs">Docs</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <main>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Git for your secrets.</h1>
+            <p class="hero-tagline">Peer-to-peer sync, post-quantum encryption, signed audit trail.<br>No cloud required.</p>
+            
+            <div class="hero-cta">
+                <a href="#install" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/uradical/envctl" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+        </div>
+
+        <code-block class="hero-terminal">
+            <pre><span class="prompt">$</span> envctl init
+<span class="dim">Generating identity...</span>
+<span class="success">✓</span> Fingerprint: sha256:7f3a...
+
+<span class="prompt">$</span> envctl env var set DATABASE_URL=postgres://... --env prod
+<span class="success">✓</span> Secret encrypted and signed
+
+<span class="prompt">$</span> envctl status
+<span class="success">✓</span> Synced with 2 peers</pre>
+        </code-block>
+    </header>
+
+    <section id="features" class="section" aria-labelledby="features-heading">
+        <h2 id="features-heading">Why envctl?</h2>
+        
+        <div class="features-grid" role="list">
+            <article class="feature" role="listitem">
+                <div class="feature-icon" aria-hidden="true">🔒</div>
+                <h3>Zero Trust</h3>
+                <p>Secrets never leave your hardware unencrypted. No cloud storage, no SaaS dependencies.</p>
+            </article>
+            
+            <article class="feature" role="listitem">
+                <div class="feature-icon" aria-hidden="true">🔗</div>
+                <h3>P2P Sync</h3>
+                <p>Direct peer-to-peer synchronization. Optional relay for async sync when teammates are offline.</p>
+            </article>
+            
+            <article class="feature" role="listitem">
+                <div class="feature-icon" aria-hidden="true">🛡️</div>
+                <h3>Post-Quantum</h3>
+                <p>ML-KEM-768 encryption protects your secrets against future quantum attacks.</p>
+            </article>
+            
+            <article class="feature" role="listitem">
+                <div class="feature-icon" aria-hidden="true">📜</div>
+                <h3>Audit Trail</h3>
+                <p>Every change is cryptographically signed. Know who changed what, and when.</p>
+            </article>
+            
+            <article class="feature" role="listitem">
+                <div class="feature-icon" aria-hidden="true">🌿</div>
+                <h3>Git-like Workflow</h3>
+                <p>Familiar commands: push, pull, status, log. Branch-like environments for dev, staging, prod.</p>
+            </article>
+            
+            <article class="feature" role="listitem">
+                <div class="feature-icon" aria-hidden="true">🤝</div>
+                <h3>Team Ready</h3>
+                <p>Invite teammates with a single command. Revoke access instantly when they leave.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="install" class="section section-dark" aria-labelledby="install-heading">
+        <h2 id="install-heading">Install</h2>
+        
+        <div class="install-options">
+            <div class="install-option">
+                <h3>From Source</h3>
+                <code-block copyable>
+                    <pre>go install envctl.dev/go/envctl@latest</pre>
+                </code-block>
+            </div>
+        </div>
+        
+        <p class="install-note">
+            See <a href="https://github.com/uradical/envctl/releases">releases</a> for binaries and other platforms.
+        </p>
+    </section>
+
+    <section id="docs" class="section" aria-labelledby="docs-heading">
+        <h2 id="docs-heading">Quick Start</h2>
+        
+        <div class="docs-steps">
+            <div class="docs-step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <h3>Initialize your identity</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl init</pre>
+                    </code-block>
+                    <p>Generates your keypair. This is your identity across all projects.</p>
+                </div>
+            </div>
+            
+            <div class="docs-step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <h3>Create a project</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl project create</pre>
+                    </code-block>
+                    <p>Sets up envctl in your current directory.</p>
+                </div>
+            </div>
+            
+            <div class="docs-step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <h3>Add secrets</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env var set API_KEY=sk_live_... --env prod
+<span class="prompt">$</span> envctl env var set DATABASE_URL=postgres://... --env prod</pre>
+                    </code-block>
+                    <p>Secrets are encrypted immediately with your key.</p>
+                </div>
+            </div>
+            
+            <div class="docs-step">
+                <span class="step-number">4</span>
+                <div class="step-content">
+                    <h3>Invite your team</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl team invite alice@example.com
+<span class="dim">Share this with your teammate:</span>
+  envctl join abc123...</pre>
+                    </code-block>
+                    <p>Teammates join with a single command.</p>
+                </div>
+            </div>
+            
+            <div class="docs-step">
+                <span class="step-number">5</span>
+                <div class="step-content">
+                    <h3>Use your secrets</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env use prod
+<span class="success">✓</span> .env written (2 secrets)</pre>
+                    </code-block>
+                    <p>Materializes decrypted .env file for your current session.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="docs-cta">
+            <a href="https://github.com/uradical/envctl#readme" class="btn btn-primary" target="_blank" rel="noopener">
+                Full Documentation →
+            </a>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <h2>Commands</h2>
+        
+        <div class="commands-grid">
+            <div class="command">
+                <code>envctl init</code>
+                <span>Generate identity</span>
+            </div>
+            <div class="command">
+                <code>envctl project create</code>
+                <span>Create project</span>
+            </div>
+            <div class="command">
+                <code>envctl join</code>
+                <span>Join existing project</span>
+            </div>
+            <div class="command">
+                <code>envctl env var set KEY=val</code>
+                <span>Add or update secret</span>
+            </div>
+            <div class="command">
+                <code>envctl env var delete KEY</code>
+                <span>Remove secret</span>
+            </div>
+            <div class="command">
+                <code>envctl env var list</code>
+                <span>Show secrets</span>
+            </div>
+            <div class="command">
+                <code>envctl env use &lt;env&gt;</code>
+                <span>Write .env file</span>
+            </div>
+            <div class="command">
+                <code>envctl status</code>
+                <span>Show sync status</span>
+            </div>
+            <div class="command">
+                <code>envctl log</code>
+                <span>View history</span>
+            </div>
+            <div class="command">
+                <code>envctl team invite</code>
+                <span>Invite teammate</span>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-sponsor">
+                <span>Sponsored by</span>
+                <a href="https://uradical.io" target="_blank" rel="noopener">
+                    <img src="uradical.png" alt="uRadical" height="24">
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            
+            <div class="footer-copy">
+                <p>© 2025 uRadical. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
