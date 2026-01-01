@@ -234,6 +234,12 @@ code, pre {
     background: var(--bg-elevated);
 }
 
+.btn-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 /* ============================================
    Sections
    ============================================ */
@@ -438,6 +444,115 @@ code, pre {
 }
 
 /* ============================================
+   Pricing Grid
+   ============================================ */
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    align-items: stretch;
+}
+
+.pricing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.15s ease;
+}
+
+.pricing-card:hover {
+    border-color: var(--border-hover);
+}
+
+.pricing-card-featured {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, var(--bg-elevated) 100%);
+}
+
+.pricing-card-featured:hover {
+    border-color: var(--accent);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border);
+}
+
+.pricing-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+.pricing-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.price-amount {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.price-period {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.pricing-features {
+    list-style: none;
+    flex: 1;
+    margin-bottom: var(--space-lg);
+}
+
+.pricing-features li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.pricing-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.pricing-card .btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ============================================
    Commands Grid
    ============================================ */
 
@@ -607,8 +722,13 @@ code-block[copyable].copied::after {
     
     .features-grid,
     .install-options,
-    .commands-grid {
+    .commands-grid,
+    .pricing-grid {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .pricing-card-featured {
+        order: -1;
     }
 }
 
@@ -633,7 +753,8 @@ code-block[copyable].copied::after {
     
     .features-grid,
     .install-options,
-    .commands-grid {
+    .commands-grid,
+    .pricing-grid {
         grid-template-columns: 1fr;
     }
     
