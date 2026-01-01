@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7D58N13C4K"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-7D58N13C4K');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -50,10 +40,13 @@
     <meta name="theme-color" content="#0a0a0b">
     <meta name="color-scheme" content="dark">
     
-    <!-- Preconnect for fonts -->
+    <!-- Fonts - preload and load in HTML to avoid CSS chain -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"></noscript>
+
     <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
     
     <!-- Structured Data -->
@@ -124,8 +117,8 @@
         ]
     }
     </script>
-  <script type="module" crossorigin src="/assets/main-CxMYgEZ8.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-DKZBn-Bd.css">
+  <script type="module" crossorigin src="/assets/main-ChvtQpW0.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-Cp-lULyP.css">
 </head>
 <body>
     <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -545,7 +538,7 @@
         <div class="footer-content">
             <div class="footer-sponsor">
                 <a href="https://uradical.io" target="_blank" rel="noopener">
-                    <img src="uradical.png" alt="uRadical" height="24">
+                    <img src="uradical.png" alt="uRadical" width="81" height="24">
                 </a>
             </div>
             
@@ -561,5 +554,14 @@
         </div>
     </footer>
 
+
+    <!-- Google Analytics - loaded after page content -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7D58N13C4K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7D58N13C4K');
+    </script>
 </body>
 </html>
