@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7D58N13C4K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7D58N13C4K');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -84,6 +94,8 @@
             <a href="#features">Features</a>
             <a href="#install">Install</a>
             <a href="#docs">Docs</a>
+            <a href="#relay">Relay</a>
+            <a href="#environments">Environments</a>
             <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -249,7 +261,7 @@
 
     <section class="section section-dark">
         <h2>Commands</h2>
-        
+
         <div class="commands-grid">
             <div class="command">
                 <code>envctl init</code>
@@ -280,6 +292,14 @@
                 <span>Write .env file</span>
             </div>
             <div class="command">
+                <code>envctl env create &lt;name&gt;</code>
+                <span>Create environment</span>
+            </div>
+            <div class="command">
+                <code>envctl env delete &lt;name&gt;</code>
+                <span>Delete environment</span>
+            </div>
+            <div class="command">
                 <code>envctl status</code>
                 <span>Show sync status</span>
             </div>
@@ -288,8 +308,141 @@
                 <span>View history</span>
             </div>
             <div class="command">
-                <code>envctl team invite</code>
+                <code>envctl project invite</code>
                 <span>Invite teammate</span>
+            </div>
+            <div class="command">
+                <code>envctl project relay set &lt;url&gt;</code>
+                <span>Enable relay sync</span>
+            </div>
+            <div class="command">
+                <code>envctl project relay status</code>
+                <span>Check relay connection</span>
+            </div>
+            <div class="command">
+                <code>envctl daemon start</code>
+                <span>Start background daemon</span>
+            </div>
+            <div class="command">
+                <code>envctl daemon stop</code>
+                <span>Stop daemon</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="relay" class="section" aria-labelledby="relay-heading">
+        <h2 id="relay-heading">Relay Server</h2>
+
+        <p class="section-intro">
+            The relay enables async sync when teammates are offline. Messages are stored encrypted
+            and delivered when peers come online. The relay never sees your secrets—only encrypted blobs.
+        </p>
+
+        <div class="docs-steps">
+            <div class="docs-step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <h3>Enable relay for your project</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl project relay set wss://relay.example.com/ws</pre>
+                    </code-block>
+                    <p>Configure a relay URL. This is recorded in your project chain and shared with teammates.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <h3>Check relay status</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl project relay status
+<span class="dim">Relay Status for myproject</span>
+
+  URL: wss://relay.example.com/ws
+  Status: <span class="success">connected</span></pre>
+                    </code-block>
+                    <p>The daemon maintains a persistent connection and automatically reconnects if disconnected.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <h3>Sync happens automatically</h3>
+                    <p>When you push secrets, they're sent to online peers directly via P2P.
+                       For offline peers, messages are encrypted and stored on the relay until they reconnect.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-highlight">
+            <h3>Self-host your relay</h3>
+            <p>Run your own relay server for full control. The relay is a simple Go binary that stores encrypted messages temporarily.</p>
+            <code-block>
+                <pre><span class="prompt">$</span> docker run -p 8080:8080 ghcr.io/uradical/envctl-relay</pre>
+            </code-block>
+        </div>
+    </section>
+
+    <section id="environments" class="section section-dark" aria-labelledby="env-heading">
+        <h2 id="env-heading">Environments</h2>
+
+        <p class="section-intro">
+            Projects have multiple environments (dev, staging, prod) with separate secrets.
+            Team members can have access to specific environments.
+        </p>
+
+        <div class="docs-steps">
+            <div class="docs-step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <h3>List environments</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env list
+<span class="dim">Environments for 'myproject':</span>
+
+* dev          (3 members) [default]
+  staging      (2 members)
+  prod         (1 member)</pre>
+                    </code-block>
+                    <p>See all environments and who has access. The asterisk marks your current environment.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <h3>Create a new environment</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env create qa
+<span class="success">✓</span> Created environment 'qa'</pre>
+                    </code-block>
+                    <p>Add environments as your project grows. New members get access to default environments only.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <h3>Switch environments</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env use staging
+<span class="success">✓</span> .env written (5 secrets)</pre>
+                    </code-block>
+                    <p>Decrypts and writes secrets for the selected environment to your .env file.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">4</span>
+                <div class="step-content">
+                    <h3>Delete an environment</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env delete old-env --force
+<span class="success">✓</span> Deleted environment 'old-env'</pre>
+                    </code-block>
+                    <p>Remove environments you no longer need. Use --force if members still have access.</p>
+                </div>
             </div>
         </div>
     </section>
