@@ -485,6 +485,8 @@ code-block pre {
     font-size: 0.8125rem;
     line-height: 1.7;
     overflow-x: auto;
+    word-break: break-word;
+    white-space: pre-wrap;
 }
 
 code-block[copyable] {

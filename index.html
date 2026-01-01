@@ -121,7 +121,7 @@
 <span class="dim">Generating identity...</span>
 <span class="success">✓</span> Fingerprint: sha256:7f3a...
 
-<span class="prompt">$</span> envctl env var set DATABASE_URL=postgres://... --env prod
+<span class="prompt">$</span> envctl env var set API_KEY=sk_live_...
 <span class="success">✓</span> Secret encrypted and signed
 
 <span class="prompt">$</span> envctl status
@@ -219,8 +219,7 @@
                 <div class="step-content">
                     <h3>Add secrets</h3>
                     <code-block>
-                        <pre><span class="prompt">$</span> envctl env var set API_KEY=sk_live_... --env prod
-<span class="prompt">$</span> envctl env var set DATABASE_URL=postgres://... --env prod</pre>
+                        <pre><span class="prompt">$</span> envctl env var set API_KEY=sk_live_...</pre>
                     </code-block>
                     <p>Secrets are encrypted immediately with your key.</p>
                 </div>
