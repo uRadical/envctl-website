@@ -760,15 +760,16 @@ code-block[copyable].copied::after {
 
 .relay-status {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-md);
+    gap: var(--space-xs);
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 1rem;
     padding: var(--space-md) var(--space-lg);
     margin-bottom: var(--space-xl);
+    width: fit-content;
+    margin-inline: auto;
 }
 
 .status-indicator {
@@ -778,8 +779,8 @@ code-block[copyable].copied::after {
 }
 
 .status-dot {
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--text-muted);
     animation: pulse 2s ease-in-out infinite;
@@ -816,7 +817,7 @@ code-block[copyable].copied::after {
 }
 
 .status-link {
-    font-size: 0.875rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     text-decoration: none;
     transition: color 0.15s ease;
