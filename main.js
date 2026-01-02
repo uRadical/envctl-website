@@ -159,3 +159,46 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+
+/**
+ * Relay Status Checker
+ * Fetches live status from relay.envctl.dev/health
+ */
+async function checkRelayStatus() {
+    const dot = document.getElementById('relay-status-dot');
+    const text = document.getElementById('relay-status-text');
+
+    if (!dot || !text) return;
+
+    try {
+        const response = await fetch('https://relay.envctl.dev/health', {
+            method: 'GET',
+            mode: 'cors',
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.status === 'ok') {
+                dot.className = 'status-dot operational';
+                text.textContent = 'Relay operational';
+            } else {
+                dot.className = 'status-dot degraded';
+                text.textContent = 'Relay degraded';
+            }
+        } else {
+            dot.className = 'status-dot down';
+            text.textContent = 'Relay unavailable';
+        }
+    } catch (error) {
+        // Network error or CORS issue - fall back gracefully
+        dot.className = 'status-dot';
+        text.textContent = 'Unable to check status';
+    }
+}
+
+// Check status on page load
+checkRelayStatus();
+
+// Refresh status every 60 seconds
+setInterval(checkRelayStatus, 60000);
