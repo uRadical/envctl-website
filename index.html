@@ -116,8 +116,8 @@
         ]
     }
     </script>
-  <script type="module" crossorigin src="/assets/main-D8iULhce.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-BOHAXvr1.css">
+  <script type="module" crossorigin src="/assets/main-B7dplx80.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-BYDcyhCf.css">
 </head>
 <body>
     <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -439,6 +439,16 @@
             The relay enables async sync when teammates are offline. Messages are stored encrypted
             and delivered when peers come online. The relay never sees your secrets—only encrypted blobs.
         </p>
+
+        <div class="relay-status" id="relay-status">
+            <div class="status-indicator">
+                <span class="status-dot" id="relay-status-dot"></span>
+                <span class="status-text" id="relay-status-text">Checking status...</span>
+            </div>
+            <a href="https://status.envctl.dev" target="_blank" rel="noopener noreferrer" class="status-link">
+                View full status page
+            </a>
+        </div>
 
         <div class="docs-steps">
             <div class="docs-step">
