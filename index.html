@@ -286,6 +286,10 @@
 <span class="success">✓</span> .env written (2 secrets)</pre>
                     </code-block>
                     <p>Materializes decrypted .env file for your current session.</p>
+                    <p class="dim" style="margin-top: 0.5rem;">Or run commands without writing secrets to disk:</p>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env apply -- npm start</pre>
+                    </code-block>
                 </div>
             </div>
         </div>
@@ -328,6 +332,14 @@
             <div class="command">
                 <code>envctl env use &lt;env&gt;</code>
                 <span>Write .env file</span>
+            </div>
+            <div class="command">
+                <code>envctl env apply -- &lt;cmd&gt;</code>
+                <span>Run with secrets (no file)</span>
+            </div>
+            <div class="command">
+                <code>envctl env shell</code>
+                <span>Interactive shell with secrets</span>
             </div>
             <div class="command">
                 <code>envctl env create &lt;name&gt;</code>
@@ -420,12 +432,62 @@
             <div class="docs-step">
                 <span class="step-number">4</span>
                 <div class="step-content">
+                    <h3>Run without .env file</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env apply -e prod -- ./deploy.sh
+<span class="dim">Passphrase:</span>
+<span class="success">✓</span> Running with 8 secrets</pre>
+                    </code-block>
+                    <p>For extra security, run commands with secrets injected directly into the process environment. No .env file is written to disk—secrets exist only in memory for the duration of the command.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">5</span>
+                <div class="step-content">
+                    <h3>Interactive shell with secrets</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> envctl env shell -e staging
+<span class="dim">Passphrase:</span>
+Starting zsh with 5 secrets from myproject/staging
+Type 'exit' to leave and clear secrets from memory.
+
+<span class="prompt">$</span> echo $API_KEY
+sk_live_...
+<span class="prompt">$</span> exit
+
+Exited envctl shell. Secrets cleared from memory.</pre>
+                    </code-block>
+                    <p>Start an interactive shell session with secrets loaded. Your normal shell (bash, zsh, PowerShell) starts with secrets available. Type 'exit' when done—secrets are cleared from memory automatically.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">6</span>
+                <div class="step-content">
                     <h3>Delete an environment</h3>
                     <code-block>
                         <pre><span class="prompt">$</span> envctl env delete old-env --force
 <span class="success">✓</span> Deleted environment 'old-env'</pre>
                     </code-block>
                     <p>Remove environments you no longer need. Use --force if members still have access.</p>
+                </div>
+            </div>
+
+            <div class="docs-step">
+                <span class="step-number">7</span>
+                <div class="step-content">
+                    <h3>Local overrides</h3>
+                    <code-block>
+                        <pre><span class="prompt">$</span> cat .env.dev
+DATABASE_URL=postgres://localhost/mydb
+DEBUG=true
+
+<span class="prompt">$</span> envctl env use dev
+<span class="success">✓</span> .env written (5 secrets)
+Applied 2 override(s) from .env.dev</pre>
+                    </code-block>
+                    <p>Create a <code>.env.&lt;environment&gt;</code> file (e.g., <code>.env.dev</code>) to override shared secrets with personal settings. Local overrides take precedence over secrets from the ops chain. This is useful for local database URLs, debug flags, or other per-developer settings that shouldn't be shared. Use <code>--no-overrides</code> to ignore local override files.</p>
                 </div>
             </div>
         </div>
