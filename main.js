@@ -202,3 +202,39 @@ checkRelayStatus();
 
 // Refresh status every 60 seconds
 setInterval(checkRelayStatus, 60000);
+
+
+/**
+ * Install Platform Switcher
+ * Handles switching between install instructions for different platforms
+ */
+function initInstallPlatformSwitcher() {
+    const platforms = document.querySelectorAll('.install-platform');
+    const instructions = document.querySelectorAll('.install-instruction');
+
+    if (!platforms.length || !instructions.length) return;
+
+    platforms.forEach(platform => {
+        platform.addEventListener('click', () => {
+            const targetPlatform = platform.dataset.platform;
+
+            // Update active button
+            platforms.forEach(p => p.classList.remove('active'));
+            platform.classList.add('active');
+
+            // Update visible instruction
+            instructions.forEach(instruction => {
+                if (instruction.dataset.platform === targetPlatform) {
+                    instruction.classList.add('active');
+                    instruction.hidden = false;
+                } else {
+                    instruction.classList.remove('active');
+                    instruction.hidden = true;
+                }
+            });
+        });
+    });
+}
+
+// Initialize platform switcher
+initInstallPlatformSwitcher();

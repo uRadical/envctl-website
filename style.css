@@ -347,6 +347,77 @@ code, pre {
    Install Section
    ============================================ */
 
+.install-platforms {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.install-platform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.install-platform:hover,
+.install-platform.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-glow);
+}
+
+.install-platform svg {
+    transition: transform 0.15s ease;
+}
+
+.install-platform:hover svg {
+    transform: translateY(-2px);
+}
+
+.install-platform span {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.install-instructions {
+    text-align: center;
+    min-height: 80px;
+}
+
+.install-instruction {
+    display: none;
+}
+
+.install-instruction.active {
+    display: block;
+}
+
+.install-instruction[hidden] {
+    display: none;
+}
+
+.install-instruction code-block {
+    display: inline-block;
+    min-width: 320px;
+    margin-bottom: var(--space-md);
+}
+
+.coming-soon {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+}
+
 .install-options {
     display: flex;
     flex-wrap: wrap;
@@ -916,31 +987,44 @@ code-block[copyable].copied::after {
         --space-xl: 3rem;
         --space-2xl: 4rem;
     }
-    
+
     .nav-links a:not(.nav-github) {
         display: none;
     }
-    
+
     .hero-cta {
         flex-direction: column;
     }
-    
+
     .hero-cta .btn {
         justify-content: center;
     }
-    
+
     .features-grid,
     .install-options,
     .commands-grid,
     .pricing-grid {
         grid-template-columns: 1fr;
     }
-    
+
+    .install-platforms {
+        gap: var(--space-md);
+    }
+
+    .install-platform {
+        padding: var(--space-md);
+    }
+
+    .install-platform svg {
+        width: 24px;
+        height: 24px;
+    }
+
     .docs-step {
         flex-direction: column;
         gap: var(--space-md);
     }
-    
+
     .footer-content {
         flex-direction: column;
         text-align: center;
