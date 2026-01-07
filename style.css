@@ -327,8 +327,8 @@ code, pre {
 }
 
 .feature-icon {
-    font-size: 1.75rem;
     margin-bottom: var(--space-md);
+    color: var(--accent);
 }
 
 .feature h3 {
@@ -362,7 +362,7 @@ code, pre {
     padding: var(--space-lg);
     color: var(--text-secondary);
     background: transparent;
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -371,8 +371,6 @@ code, pre {
 .install-platform:hover,
 .install-platform.active {
     color: var(--accent);
-    border-color: var(--accent);
-    background: var(--accent-glow);
 }
 
 .install-platform svg {
