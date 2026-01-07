@@ -178,7 +178,7 @@ code, pre {
 }
 
 .hero-terminal {
-    background: var(--bg-code);
+    background: #2d2d30;
     border: 1px solid var(--border);
     border-radius: 10px;
     font-size: 0.875rem;
@@ -191,7 +191,7 @@ code, pre {
     align-items: center;
     gap: 8px;
     padding: 12px 16px;
-    background: var(--bg-elevated);
+    background: #252528;
     border-bottom: 1px solid var(--border);
 }
 
