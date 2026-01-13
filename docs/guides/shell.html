@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Shell Integration — envctl Documentation</title>
+    <meta name="title" content="Shell Integration — envctl Documentation">
+    <meta name="description" content="Configure shell completions, prompt integration, and Starship support for envctl. Covers Bash, Zsh, and Fish.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/shell.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/shell.html">
+    <meta property="og:title" content="Shell Integration — envctl Documentation">
+    <meta property="og:description" content="Configure shell completions and prompt integration for envctl.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html" class="active">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Shell Integration</h1>
+                    <p class="docs-lead">Configure shell completions and prompt integration for envctl. See your current project and environment at a glance.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Shell Completions</h2>
+
+                    <p>envctl provides tab completions for commands, flags, project names, and environment names. Generate completions for your shell:</p>
+
+                    <h3>Bash</h3>
+
+                    <p>Add to your <code>~/.bashrc</code>:</p>
+
+                    <pre><code><span class="dim"># envctl completions</span>
+eval "$(envctl completion bash)"</code></pre>
+
+                    <p>Or generate a file for system-wide completions:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl completion bash > /etc/bash_completion.d/envctl</code></pre>
+
+                    <h3>Zsh</h3>
+
+                    <p>Add to your <code>~/.zshrc</code>:</p>
+
+                    <pre><code><span class="dim"># envctl completions</span>
+eval "$(envctl completion zsh)"</code></pre>
+
+                    <p>If you use a completions directory, generate a file:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl completion zsh > "${fpath[1]}/_envctl"</code></pre>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Note</strong></p>
+                        <p>If completions don't work immediately, you may need to run <code>compinit</code> or start a new shell session.</p>
+                    </div>
+
+                    <h3>Fish</h3>
+
+                    <p>Add to your <code>~/.config/fish/config.fish</code>:</p>
+
+                    <pre><code><span class="dim"># envctl completions</span>
+envctl completion fish | source</code></pre>
+
+                    <p>Or generate a file:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl completion fish > ~/.config/fish/completions/envctl.fish</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Prompt Integration</h2>
+
+                    <p>Display your current envctl project and environment in your shell prompt. This helps you stay aware of which secrets context you're working in.</p>
+
+                    <h3>Built-in Prompt Command</h3>
+
+                    <p>envctl includes a fast prompt helper that outputs the current context:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl prompt
+myapp/dev</code></pre>
+
+                    <p>If you're not in an envctl project, it outputs nothing. This makes it safe to include in your prompt unconditionally.</p>
+
+                    <h3>Bash</h3>
+
+                    <p>Add to your <code>~/.bashrc</code>:</p>
+
+                    <pre><code><span class="dim"># Add envctl context to prompt</span>
+__envctl_prompt() {
+    local ctx
+    ctx=$(envctl prompt 2>/dev/null)
+    if [[ -n "$ctx" ]]; then
+        echo "[$ctx] "
+    fi
+}
+
+PS1='$(__envctl_prompt)\u@\h:\w\$ '</code></pre>
+
+                    <p>This shows:</p>
+
+                    <pre><code>[myapp/dev] user@host:~/projects/myapp$</code></pre>
+
+                    <h3>Zsh</h3>
+
+                    <p>Add to your <code>~/.zshrc</code>:</p>
+
+                    <pre><code><span class="dim"># Add envctl context to prompt</span>
+autoload -Uz add-zsh-hook
+
+__envctl_prompt() {
+    local ctx
+    ctx=$(envctl prompt 2>/dev/null)
+    if [[ -n "$ctx" ]]; then
+        echo "[$ctx] "
+    fi
+}
+
+setopt PROMPT_SUBST
+PROMPT='$(__envctl_prompt)%n@%m:%~%# '</code></pre>
+
+                    <h3>Fish</h3>
+
+                    <p>Add to your <code>~/.config/fish/config.fish</code>:</p>
+
+                    <pre><code><span class="dim"># Add envctl context to prompt</span>
+function fish_prompt
+    set -l ctx (envctl prompt 2>/dev/null)
+    if test -n "$ctx"
+        echo -n "[$ctx] "
+    end
+    echo -n (whoami)'@'(hostname)':'(prompt_pwd)'$ '
+end</code></pre>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>Performance</strong></p>
+                        <p>The <code>envctl prompt</code> command is optimized to be fast (~5ms), but if you notice slowdown, consider using Starship which caches the result.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Starship Integration</h2>
+
+                    <p><a href="https://starship.rs/" target="_blank" rel="noopener">Starship</a> is a popular cross-shell prompt that supports custom modules. envctl works well with Starship's custom command feature.</p>
+
+                    <h3>Basic Setup</h3>
+
+                    <p>Add to your <code>~/.config/starship.toml</code>:</p>
+
+                    <pre><code>[custom.envctl]
+command = "envctl prompt"
+when = "envctl prompt"
+format = "[$output]($style) "
+style = "bold green"</code></pre>
+
+                    <p>This displays your envctl context in green when you're in a project directory.</p>
+
+                    <h3>Environment-Aware Styling</h3>
+
+                    <p>Color-code by environment to make prod stand out:</p>
+
+                    <pre><code>[custom.envctl]
+command = "envctl prompt"
+when = "envctl prompt"
+format = "[$output]($style) "
+style = "bold green"
+
+[custom.envctl_prod]
+command = "envctl prompt | grep -q '/prod$' && envctl prompt"
+when = "envctl prompt | grep -q '/prod$'"
+format = "[$output]($style) "
+style = "bold red"</code></pre>
+
+                    <h3>With Symbol</h3>
+
+                    <p>Add a symbol to make it visually distinct:</p>
+
+                    <pre><code>[custom.envctl]
+command = "envctl prompt"
+when = "envctl prompt"
+symbol = "🔐 "
+format = "[$symbol$output]($style) "
+style = "bold cyan"</code></pre>
+
+                    <p>Result:</p>
+
+                    <pre><code>🔐 myapp/dev ~/projects/myapp</code></pre>
+
+                    <h3>Detecting the Environment</h3>
+
+                    <p>For more advanced styling, use <code>envctl prompt --format</code>:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl prompt --format json
+{"project":"myapp","environment":"dev"}
+
+<span class="prompt">$</span> envctl prompt --format env
+ENVCTL_PROJECT=myapp
+ENVCTL_ENV=dev</code></pre>
+
+                    <p>This allows scripts to parse the output and apply different styling per environment.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Environment Variables</h2>
+
+                    <p>envctl sets these variables when you run <code>envctl env shell</code> or use the VS Code extension:</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ENVCTL_PROJECT</code></td>
+                                <td>Current project name</td>
+                            </tr>
+                            <tr>
+                                <td><code>ENVCTL_ENV</code></td>
+                                <td>Current environment (dev, staging, prod)</td>
+                            </tr>
+                            <tr>
+                                <td><code>ENVCTL_ACTIVE</code></td>
+                                <td>Set to "1" when secrets are loaded</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>You can use these in your prompt without calling <code>envctl prompt</code>:</p>
+
+                    <pre><code><span class="dim"># Bash/Zsh - use env vars directly</span>
+__envctl_prompt() {
+    if [[ -n "$ENVCTL_PROJECT" ]]; then
+        echo "[$ENVCTL_PROJECT/$ENVCTL_ENV] "
+    fi
+}</code></pre>
+
+                    <p>This is faster since it doesn't spawn a subprocess, but only works when secrets are loaded via <code>envctl env shell</code>.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Troubleshooting</h2>
+
+                    <h3>Completions not working</h3>
+
+                    <ul>
+                        <li>Ensure you've started a new shell or sourced your config</li>
+                        <li>For Zsh, verify completion is enabled: <code>autoload -Uz compinit && compinit</code></li>
+                        <li>Check that envctl is in your PATH: <code>which envctl</code></li>
+                    </ul>
+
+                    <h3>Prompt is slow</h3>
+
+                    <ul>
+                        <li>Use the environment variable method instead of <code>envctl prompt</code></li>
+                        <li>Consider using Starship which has built-in caching</li>
+                        <li>Check daemon status: <code>envctl daemon status</code></li>
+                    </ul>
+
+                    <h3>Prompt shows nothing</h3>
+
+                    <ul>
+                        <li>Verify you're in a project directory: <code>envctl status</code></li>
+                        <li>Check for errors: <code>envctl prompt</code> (without redirecting stderr)</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/getting-started.html">Getting Started</a> — Install envctl CLI</li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a> — IDE integration</li>
+                        <li><a href="/docs/commands.html">Command Reference</a> — All envctl commands</li>
+                        <li><a href="https://starship.rs/" target="_blank" rel="noopener">Starship</a> — Cross-shell prompt</li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

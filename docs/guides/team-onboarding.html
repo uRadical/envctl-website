@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Team Onboarding — envctl Documentation</title>
+    <meta name="title" content="Team Onboarding — envctl Documentation">
+    <meta name="description" content="How to invite new team members to envctl projects. Step-by-step guide for inviting, granting access, and verifying sync.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/team-onboarding.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/team-onboarding.html">
+    <meta property="og:title" content="Team Onboarding — envctl Documentation">
+    <meta property="og:description" content="How to invite new team members to your projects.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html" class="active">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Team Onboarding</h1>
+                    <p class="docs-lead">How to invite new team members to your project and grant them access to the right environments.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Overview</h2>
+
+                    <p>Adding a new team member involves three steps:</p>
+
+                    <ol>
+                        <li><strong>New member sets up envctl</strong> — Install and create their identity</li>
+                        <li><strong>You create an invitation</strong> — Using their public key</li>
+                        <li><strong>They accept and sync</strong> — Join the project and receive secrets</li>
+                    </ol>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 1: New Member Setup</h2>
+
+                    <p>The new team member needs to install envctl and create their identity. Share these instructions with them:</p>
+
+                    <pre><code><span class="dim"># Install envctl</span>
+<span class="prompt">$</span> curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+
+<span class="dim"># Create identity</span>
+<span class="prompt">$</span> envctl init
+Enter a passphrase (min 8 characters):
+<span class="success">✓</span> Identity created
+
+<span class="dim"># Get public key to share</span>
+<span class="prompt">$</span> envctl whoami --verbose
+Name: bob-laptop
+Fingerprint: sha256:8d4e2f1a...
+Public key: 8d4e2f1a5b6c7d8e9f0a1b2c3d4e5f6a...</code></pre>
+
+                    <p>They need to send you their <strong>public key</strong> (the long hex string). This can be shared over any channel—it's not sensitive.</p>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Verifying identity</strong></p>
+                        <p>For high-security environments, verify the fingerprint through a separate channel (phone call, video chat, in person) to prevent man-in-the-middle attacks.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 2: Create the Invitation</h2>
+
+                    <p>Once you have their public key, create an invitation:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project invite bob --pubkey 8d4e2f1a5b6c7d8e9f0a1b2c3d4e5f6a...
+<span class="success">✓</span> Invitation created
+
+Share this with bob:
+
+  envctl join eyJwcm9qZWN0IjoibXlhcHAi...
+
+Invite expires in 10 minutes.</code></pre>
+
+                    <p>Send the <code>envctl join ...</code> command to the new team member. The invite code contains:</p>
+
+                    <ul>
+                        <li>Project name and configuration</li>
+                        <li>Your identity (for verification)</li>
+                        <li>Initial environment access</li>
+                        <li>Expiration timestamp</li>
+                    </ul>
+
+                    <h3>Controlling Initial Access</h3>
+
+                    <p>By default, new members get access to the <code>dev</code> environment only. You can customize this:</p>
+
+                    <pre><code><span class="dim"># Grant dev and staging access</span>
+<span class="prompt">$</span> envctl project invite bob --pubkey 8d4e... --env dev,staging
+
+<span class="dim"># Grant all environments (use with caution)</span>
+<span class="prompt">$</span> envctl project invite bob --pubkey 8d4e... --env dev,staging,prod
+
+<span class="dim"># Grant admin role</span>
+<span class="prompt">$</span> envctl project invite bob --pubkey 8d4e... --role admin</code></pre>
+
+                    <h3>Roles</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Can View Secrets</th>
+                                <th>Can Modify Secrets</th>
+                                <th>Can Manage Members</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>reader</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>member</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>admin</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 3: Accept the Invitation</h2>
+
+                    <p>The new team member runs the join command in their project directory:</p>
+
+                    <pre><code><span class="prompt">$</span> cd ~/projects/myapp
+<span class="prompt">$</span> envctl join eyJwcm9qZWN0IjoibXlhcHAi...
+
+<span class="success">✓</span> Joined project "myapp"
+  Environments: dev, staging
+  Invited by: alice (sha256:7f3a9b2c...)
+
+Syncing secrets...</code></pre>
+
+                    <p>This creates a <code>.envctl/</code> directory and begins syncing secrets for the environments they have access to.</p>
+
+                    <h3>Start the Daemon</h3>
+
+                    <p>For ongoing sync, they should start the daemon:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl daemon start
+<span class="success">✓</span> Daemon started
+  P2P port: 7834</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 4: Verify Sync</h2>
+
+                    <p>Both parties should verify that sync is working:</p>
+
+                    <h3>On the New Member's Machine</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl status
+Project: myapp
+Environment: dev (3 secrets)
+<span class="success">✓</span> Synced with 1 peer
+
+<span class="prompt">$</span> envctl env var list
+<span class="dim">Variables in myapp/dev:</span>
+
+DATABASE_URL = postgres://...
+API_KEY      = sk_de...23
+DEBUG        = true</code></pre>
+
+                    <h3>On Your Machine</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl project members
+<span class="dim">Members of myapp:</span>
+
+Name    Role    Environments    Joined
+----    ----    ------------    ------
+alice   admin   dev,staging,prod   2024-01-05
+bob     member  dev,staging        2024-03-01</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Granting Additional Access Later</h2>
+
+                    <p>You can grant access to more environments after someone joins:</p>
+
+                    <pre><code><span class="dim"># Grant prod access</span>
+<span class="prompt">$</span> envctl project grant bob --env prod
+<span class="success">✓</span> Granted bob access to prod
+
+<span class="dim"># Verify</span>
+<span class="prompt">$</span> envctl project access bob
+<span class="dim">Access for bob in myapp:</span>
+
+Environment   Role      Since
+-----------   ----      -----
+dev           member    2024-03-01
+staging       member    2024-03-01
+prod          member    2024-03-01</code></pre>
+
+                    <p>You can also revoke access:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project revoke bob --env prod
+<span class="success">✓</span> Revoked bob's access to prod</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Troubleshooting Onboarding</h2>
+
+                    <h3>Invite Expired</h3>
+
+                    <p>Invites expire after 10 minutes by default. Create a new one:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project invite bob --pubkey 8d4e... --ttl 30m</code></pre>
+
+                    <h3>Sync Not Working</h3>
+
+                    <p>Check that both parties have the daemon running:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl daemon status
+<span class="success">✓</span> Daemon running (PID 12345)
+  Connected peers: 1</code></pre>
+
+                    <p>If on different networks, you may need to configure the relay:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project relay set relay.envctl.dev</code></pre>
+
+                    <h3>Wrong Environments</h3>
+
+                    <p>If someone needs different access than initially granted:</p>
+
+                    <pre><code><span class="dim"># Grant missing environment</span>
+<span class="prompt">$</span> envctl project grant bob --env staging
+
+<span class="dim"># Revoke environment they shouldn't have</span>
+<span class="prompt">$</span> envctl project revoke bob --env prod</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Best Practices</h2>
+
+                    <h3>Principle of Least Privilege</h3>
+
+                    <p>Start new members with minimal access:</p>
+
+                    <pre><code><span class="dim"># New developer: dev only</span>
+<span class="prompt">$</span> envctl project invite newdev --pubkey ... --env dev
+
+<span class="dim"># After onboarding: add staging</span>
+<span class="prompt">$</span> envctl project grant newdev --env staging
+
+<span class="dim"># For deploys: add prod</span>
+<span class="prompt">$</span> envctl project grant newdev --env prod</code></pre>
+
+                    <h3>Use the Relay for Remote Teams</h3>
+
+                    <p>If team members are in different locations or time zones, enable the relay before inviting:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project relay set relay.envctl.dev</code></pre>
+
+                    <p>This ensures secrets sync even when peers aren't online simultaneously.</p>
+
+                    <h3>Verify Identities for Sensitive Projects</h3>
+
+                    <p>Before granting production access, verify the person's fingerprint through a video call or in person:</p>
+
+                    <pre><code><span class="dim"># They read their fingerprint to you</span>
+<span class="prompt">$</span> envctl whoami
+Fingerprint: sha256:8d4e2f1a...
+
+<span class="dim"># You verify it matches what you have</span>
+<span class="prompt">$</span> envctl project members --verbose
+bob: sha256:8d4e2f1a...</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a> — Removing team members</li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a> — Managing access per environment</li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a> — Enabling async sync</li>
+                        <li><a href="/docs/commands.html#project-invite">Command Reference: project invite</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

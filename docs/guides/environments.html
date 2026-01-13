@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Multiple Environments — envctl Documentation</title>
+    <meta name="title" content="Multiple Environments — envctl Documentation">
+    <meta name="description" content="Managing dev, staging, and production environments in envctl. Control access per environment, switch contexts, and use local overrides.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/environments.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/environments.html">
+    <meta property="og:title" content="Multiple Environments — envctl Documentation">
+    <meta property="og:description" content="Managing dev, staging, and production environments.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html" class="active">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Multiple Environments</h1>
+                    <p class="docs-lead">Separate your secrets by environment (dev, staging, prod) and control who has access to each.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Default Environments</h2>
+
+                    <p>When you create a project, three environments are created by default:</p>
+
+                    <ul>
+                        <li><strong>dev</strong> — Local development. All team members typically have access.</li>
+                        <li><strong>staging</strong> — Testing and QA. Mirrors production but with test data.</li>
+                        <li><strong>prod</strong> — Production. Restricted access.</li>
+                    </ul>
+
+                    <pre><code><span class="prompt">$</span> envctl project create myapp
+<span class="success">✓</span> Created project "myapp"
+  Environments: dev, staging, prod</code></pre>
+
+                    <p>You can customize the initial environments:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project create myapp --envs dev,qa,staging,prod</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Creating Environments</h2>
+
+                    <p>Add new environments as your project grows:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env create qa
+<span class="success">✓</span> Created environment 'qa'
+
+<span class="prompt">$</span> envctl env create demo
+<span class="success">✓</span> Created environment 'demo'</code></pre>
+
+                    <p>View all environments:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env list
+<span class="dim">Environments for myapp:</span>
+
+* dev          (4 members)
+  qa           (2 members)
+  staging      (3 members)
+  demo         (2 members)
+  prod         (1 member)</code></pre>
+
+                    <p>The asterisk (*) shows your current environment.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Controlling Access</h2>
+
+                    <p>Access is granted per-environment. By default, new members only get access to <code>dev</code>.</p>
+
+                    <h3>Granting Access</h3>
+
+                    <pre><code><span class="dim"># Grant access to staging</span>
+<span class="prompt">$</span> envctl project grant alice --env staging
+<span class="success">✓</span> Granted alice access to staging
+
+<span class="dim"># Grant access to multiple environments</span>
+<span class="prompt">$</span> envctl project grant bob --env staging,qa
+<span class="success">✓</span> Granted bob access to staging, qa
+
+<span class="dim"># Grant prod access (use with caution)</span>
+<span class="prompt">$</span> envctl project grant alice --env prod
+<span class="success">✓</span> Granted alice access to prod</code></pre>
+
+                    <h3>Revoking Access</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl project revoke bob --env prod
+<span class="success">✓</span> Revoked bob's access to prod</code></pre>
+
+                    <h3>Viewing Access</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl project access alice
+<span class="dim">Access for alice in myapp:</span>
+
+Environment   Role      Since
+-----------   ----      -----
+dev           member    2024-01-10
+staging       member    2024-01-15
+qa            member    2024-01-15
+prod          member    2024-02-01</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Switching Environments</h2>
+
+                    <h3>Write a .env file</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl env use dev
+Passphrase:
+<span class="success">✓</span> .env written (5 secrets)
+
+<span class="prompt">$</span> envctl env use staging
+<span class="success">✓</span> .env written (5 secrets)</code></pre>
+
+                    <p>This decrypts secrets and writes them to <code>.env</code> in the current directory.</p>
+
+                    <h3>Run a command with secrets</h3>
+
+                    <pre><code><span class="dim"># Run with dev secrets (default)</span>
+<span class="prompt">$</span> envctl env apply -- npm start
+
+<span class="dim"># Run with staging secrets</span>
+<span class="prompt">$</span> envctl env apply -e staging -- npm test
+
+<span class="dim"># Run with prod secrets</span>
+<span class="prompt">$</span> envctl env apply -e prod -- ./deploy.sh</code></pre>
+
+                    <p>No <code>.env</code> file is written—secrets exist only in memory.</p>
+
+                    <h3>Open an interactive shell</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl env shell -e staging
+Starting zsh with 5 secrets from myapp/staging
+Type 'exit' to leave and clear secrets from memory.
+
+<span class="prompt">$</span> echo $DATABASE_URL
+postgres://staging-db.example.com/myapp
+
+<span class="prompt">$</span> exit
+Exited envctl shell. Secrets cleared.</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Setting Secrets Per Environment</h2>
+
+                    <p>Each environment has its own set of secrets:</p>
+
+                    <pre><code><span class="dim"># Set in current environment</span>
+<span class="prompt">$</span> envctl env var set DATABASE_URL=postgres://localhost/myapp_dev
+<span class="success">✓</span> Set DATABASE_URL in dev
+
+<span class="dim"># Set in a specific environment</span>
+<span class="prompt">$</span> envctl env var set -e staging DATABASE_URL=postgres://staging-db/myapp
+<span class="success">✓</span> Set DATABASE_URL in staging
+
+<span class="prompt">$</span> envctl env var set -e prod DATABASE_URL=postgres://prod-db/myapp
+<span class="success">✓</span> Set DATABASE_URL in prod</code></pre>
+
+                    <h3>Copying Secrets Between Environments</h3>
+
+                    <p>To copy a secret from one environment to another, you need to get and set it:</p>
+
+                    <pre><code><span class="dim"># View staging value</span>
+<span class="prompt">$</span> envctl env var list -e staging
+STRIPE_KEY = pk_test_...
+
+<span class="dim"># Set same key with different value in prod</span>
+<span class="prompt">$</span> envctl env var set -e prod STRIPE_KEY=pk_live_...</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Local Overrides</h2>
+
+                    <p>You can override shared secrets with local values using <code>.env.&lt;environment&gt;</code> files. This is useful for:</p>
+
+                    <ul>
+                        <li>Personal database URLs</li>
+                        <li>Debug settings</li>
+                        <li>Local service ports</li>
+                    </ul>
+
+                    <h3>Creating an Override File</h3>
+
+                    <p>Create a file named <code>.env.dev</code> (or <code>.env.staging</code>, etc.):</p>
+
+                    <pre><code><span class="prompt">$</span> cat .env.dev
+# Local overrides - not synced to team
+DATABASE_URL=postgres://localhost:5433/myapp_dev
+DEBUG=true
+LOG_LEVEL=debug</code></pre>
+
+                    <h3>How Overrides Work</h3>
+
+                    <p>When you run <code>envctl env use dev</code>, envctl:</p>
+
+                    <ol>
+                        <li>Decrypts secrets from the ops chain</li>
+                        <li>Looks for <code>.env.dev</code></li>
+                        <li>Merges overrides (local values win)</li>
+                        <li>Writes combined result to <code>.env</code></li>
+                    </ol>
+
+                    <pre><code><span class="prompt">$</span> envctl env use dev
+<span class="success">✓</span> .env written (5 secrets)
+Applied 3 override(s) from .env.dev</code></pre>
+
+                    <h3>Ignoring Overrides</h3>
+
+                    <p>To use only the shared secrets without local overrides:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env use dev --no-overrides
+<span class="success">✓</span> .env written (5 secrets)</code></pre>
+
+                    <h3>Git Ignore Override Files</h3>
+
+                    <p>Add override files to <code>.gitignore</code>:</p>
+
+                    <pre><code># .gitignore
+.env
+.env.dev
+.env.staging
+.env.local</code></pre>
+
+                    <p>These are personal settings and shouldn't be committed.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Environment Naming Conventions</h2>
+
+                    <p>Common patterns for environment names:</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Environment</th>
+                                <th>Purpose</th>
+                                <th>Who Has Access</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>dev</td>
+                                <td>Local development</td>
+                                <td>All developers</td>
+                            </tr>
+                            <tr>
+                                <td>test</td>
+                                <td>Automated tests</td>
+                                <td>All developers, CI</td>
+                            </tr>
+                            <tr>
+                                <td>qa</td>
+                                <td>QA testing</td>
+                                <td>QA team, developers</td>
+                            </tr>
+                            <tr>
+                                <td>staging</td>
+                                <td>Pre-production</td>
+                                <td>Senior developers, ops</td>
+                            </tr>
+                            <tr>
+                                <td>demo</td>
+                                <td>Sales demos</td>
+                                <td>Sales, support</td>
+                            </tr>
+                            <tr>
+                                <td>prod</td>
+                                <td>Production</td>
+                                <td>Ops, senior developers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Deleting Environments</h2>
+
+                    <p>Remove environments you no longer need:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env delete qa
+Delete environment 'qa' and all its secrets? [y/N] y
+<span class="success">✓</span> Deleted environment 'qa'</code></pre>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>This is permanent</strong></p>
+                        <p>Deleting an environment removes all its secrets. This cannot be undone.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Best Practices</h2>
+
+                    <h3>Least Privilege</h3>
+
+                    <p>Give team members access only to the environments they need:</p>
+
+                    <ul>
+                        <li>New developers: <code>dev</code> only</li>
+                        <li>After onboarding: add <code>staging</code></li>
+                        <li>For deployments: add <code>prod</code> as needed</li>
+                    </ul>
+
+                    <h3>Production Access</h3>
+
+                    <p>Limit production access to a small group. Most developers don't need prod secrets for daily work.</p>
+
+                    <h3>Regular Audits</h3>
+
+                    <p>Periodically review who has access:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project members
+<span class="dim">Members of myapp:</span>
+
+Name      Role    Environments           Joined
+----      ----    ------------           ------
+alice     admin   dev,staging,prod       2024-01-05
+bob       member  dev,staging            2024-01-10
+charlie   member  dev                    2024-02-01
+diana     reader  dev,staging,prod       2024-02-15</code></pre>
+
+                    <h3>Use Descriptive Names</h3>
+
+                    <p>If you have multiple staging-like environments, use clear names:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env create staging-us
+<span class="prompt">$</span> envctl env create staging-eu
+<span class="prompt">$</span> envctl env create staging-asia</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a> — Granting environment access to new members</li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a> — Revoking access and rotating secrets</li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a> — Using environments in pipelines</li>
+                        <li><a href="/docs/commands.html#environment">Command Reference: Environment commands</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

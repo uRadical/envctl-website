@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Using the Relay — envctl Documentation</title>
+    <meta name="title" content="Using the Relay — envctl Documentation">
+    <meta name="description" content="Enable async sync with envctl relay servers. When you need a relay, how to set it up, what the relay can see, and troubleshooting connection issues.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/relay.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/relay.html">
+    <meta property="og:title" content="Using the Relay — envctl Documentation">
+    <meta property="og:description" content="Enable async sync with envctl relay servers.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html" class="active">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Using the Relay</h1>
+                    <p class="docs-lead">The relay enables async sync when teammates aren't online at the same time. Messages are stored encrypted and delivered when peers come online.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>When You Need a Relay</h2>
+
+                    <p>envctl works peer-to-peer by default. The relay is optional but useful when:</p>
+
+                    <ul>
+                        <li><strong>Team members are in different time zones</strong> — Peers rarely online simultaneously</li>
+                        <li><strong>Working remotely</strong> — Direct P2P connections blocked by firewalls/NAT</li>
+                        <li><strong>Guaranteed delivery</strong> — Changes must reach everyone, even if they're offline</li>
+                        <li><strong>Onboarding new members</strong> — They need to sync before meeting other peers</li>
+                    </ul>
+
+                    <p>You don't need the relay if:</p>
+                    <ul>
+                        <li>Team is on the same local network (mDNS discovery works)</li>
+                        <li>Team is small and online at similar times</li>
+                        <li>You prefer fully P2P operation</li>
+                        <li>You can run an always-on node (see below)</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Alternative: Always-On Node</h2>
+
+                    <p>If your team shares a network (physical LAN or VPN), you can run an <strong>always-on node</strong> instead of using a relay. This is a machine that runs the envctl daemon continuously, acting as a persistent peer that's always available for sync.</p>
+
+                    <h3>When to Use an Always-On Node</h3>
+
+                    <ul>
+                        <li>Team shares a physical network or VPN</li>
+                        <li>You have an always-on machine (server, NAS, Raspberry Pi, cloud VM)</li>
+                        <li>You want to avoid external infrastructure entirely</li>
+                        <li>You prefer a free, self-hosted solution</li>
+                    </ul>
+
+                    <h3>Always-On Node vs Relay</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Always-On Node</th>
+                                <th>Relay Server</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cost</td>
+                                <td>Free (your hardware)</td>
+                                <td>Free tier / Paid plans</td>
+                            </tr>
+                            <tr>
+                                <td>Network requirement</td>
+                                <td>Shared network or VPN</td>
+                                <td>Internet access only</td>
+                            </tr>
+                            <tr>
+                                <td>Setup complexity</td>
+                                <td>Run daemon on a server</td>
+                                <td>Single command</td>
+                            </tr>
+                            <tr>
+                                <td>Works across internet</td>
+                                <td>Only via VPN</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>External dependency</td>
+                                <td>None</td>
+                                <td>Relay service</td>
+                            </tr>
+                            <tr>
+                                <td>Metadata visibility</td>
+                                <td>You control everything</td>
+                                <td>Relay sees metadata</td>
+                            </tr>
+                            <tr>
+                                <td>Maintenance</td>
+                                <td>You maintain the node</td>
+                                <td>Managed for you</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Setting Up an Always-On Node</h3>
+
+                    <p>Any machine that can run envctl can be an always-on node. Common choices:</p>
+                    <ul>
+                        <li>Office server or NAS</li>
+                        <li>Raspberry Pi on the network</li>
+                        <li>Cloud VM (if using a VPN)</li>
+                        <li>Any always-on workstation</li>
+                    </ul>
+
+                    <h4>1. Install envctl on the node</h4>
+
+                    <pre><code><span class="prompt">$</span> curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh</code></pre>
+
+                    <h4>2. Create an identity for the node</h4>
+
+                    <pre><code><span class="prompt">$</span> envctl init --name sync-server --keychain
+<span class="success">✓</span> Identity created
+  Name: sync-server
+  Fingerprint: sha256:9a8b7c6d...</code></pre>
+
+                    <p>Using <code>--keychain</code> stores the passphrase so the daemon can start without manual intervention.</p>
+
+                    <h4>3. Join the project</h4>
+
+                    <p>Invite the node to your project like any team member:</p>
+
+                    <pre><code><span class="dim"># On your machine:</span>
+<span class="prompt">$</span> envctl project invite sync-server --pubkey 9a8b7c6d... --env dev,staging,prod
+
+<span class="dim"># On the always-on node:</span>
+<span class="prompt">$</span> envctl join eyJwcm9qZWN0Ijoi...</code></pre>
+
+                    <h4>4. Install as a system service</h4>
+
+                    <p>Configure the daemon to start automatically on boot. The recommended approach depends on your platform.</p>
+
+                    <h5>Linux (systemd)</h5>
+
+                    <p>Create a systemd service file:</p>
+
+                    <pre><code><span class="prompt">$</span> sudo nano /etc/systemd/system/envctl.service</code></pre>
+
+                    <p>Add the following configuration:</p>
+
+                    <pre><code>[Unit]
+Description=envctl P2P secrets sync daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=envctl
+Group=envctl
+ExecStart=/usr/local/bin/envctl daemon run
+Restart=on-failure
+RestartSec=5
+Environment=HOME=/home/envctl
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+                    <p>If running as a dedicated user, create one first:</p>
+
+                    <pre><code><span class="prompt">$</span> sudo useradd -r -m -s /bin/false envctl</code></pre>
+
+                    <p>Then set up the identity and project for that user before enabling the service. Alternatively, change <code>User=</code> and <code>Group=</code> to your own user account.</p>
+
+                    <p>Enable and start the service:</p>
+
+                    <pre><code><span class="prompt">$</span> sudo systemctl daemon-reload
+<span class="prompt">$</span> sudo systemctl enable envctl
+<span class="prompt">$</span> sudo systemctl start envctl</code></pre>
+
+                    <p>Check the service status:</p>
+
+                    <pre><code><span class="prompt">$</span> sudo systemctl status envctl
+● envctl.service - envctl P2P secrets sync daemon
+     Active: active (running) since Mon 2024-03-01 10:00:00 UTC
+   Main PID: 12345 (envctl)
+     Memory: 24.0M
+        CPU: 1.234s
+     CGroup: /system.slice/envctl.service
+             └─12345 /usr/local/bin/envctl daemon run</code></pre>
+
+                    <p>View logs with journalctl:</p>
+
+                    <pre><code><span class="prompt">$</span> sudo journalctl -u envctl -f</code></pre>
+
+                    <h5>macOS (launchd)</h5>
+
+                    <p>The built-in installer creates a launchd plist:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl daemon install
+<span class="success">✓</span> Installed as system service
+
+<span class="prompt">$</span> launchctl load ~/Library/LaunchAgents/io.envctl.daemon.plist</code></pre>
+
+                    <p>To start on boot, the plist is automatically loaded on login. Check status with:</p>
+
+                    <pre><code><span class="prompt">$</span> launchctl list | grep envctl</code></pre>
+
+                    <h4>5. Verify it's running</h4>
+
+                    <pre><code><span class="prompt">$</span> envctl daemon status
+<span class="success">✓</span> Daemon running (PID 12345)
+  P2P port: 7834
+  Uptime: 3 days, 2 hours</code></pre>
+
+                    <h3>How It Works</h3>
+
+                    <p>Once the always-on node is running:</p>
+
+                    <ol>
+                        <li>When you push changes, the node receives them (it's always online)</li>
+                        <li>When teammates come online, they discover the node via mDNS or saved peers</li>
+                        <li>They sync with the node, receiving any changes they missed</li>
+                    </ol>
+
+                    <p>The node acts as a hub that's always available, solving the "nobody online" problem without external infrastructure.</p>
+
+                    <h3>VPN Considerations</h3>
+
+                    <p>If your team uses a VPN to create a shared network:</p>
+
+                    <ul>
+                        <li>The always-on node should be connected to the VPN</li>
+                        <li>mDNS may not work across some VPNs—add peers manually:
+                            <pre><code><span class="prompt">$</span> envctl peers add 10.8.0.1:7834</code></pre>
+                        </li>
+                        <li>Consider running the node on your VPN server itself</li>
+                    </ul>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Best of both worlds</strong></p>
+                        <p>You can use both an always-on node and a relay. The node handles sync within your network, while the relay provides backup for team members who can't connect to the VPN.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Setting Up the Relay</h2>
+
+                    <p>Configure a relay for your project:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project relay set relay.envctl.dev
+<span class="success">✓</span> Relay configured for myapp
+  URL: wss://relay.envctl.dev/ws</code></pre>
+
+                    <p>This change is recorded in your project's membership chain and automatically synced to all team members.</p>
+
+                    <h3>Using the Public Relay</h3>
+
+                    <p>The public relay at <code>relay.envctl.dev</code> is available for all envctl users:</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th>Retention</th>
+                                <th>Rate Limits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Free</td>
+                                <td>7 days</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Pro</td>
+                                <td>30 days</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Enterprise</td>
+                                <td>Unlimited</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Self-Hosting</h3>
+
+                    <p>For Enterprise users or those who prefer self-hosting, you can run your own relay:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project relay set relay.yourcompany.com
+<span class="success">✓</span> Relay configured for myapp
+  URL: wss://relay.yourcompany.com/ws</code></pre>
+
+                    <p>Contact <a href="mailto:sales@envctl.dev">sales@envctl.dev</a> for self-hosting documentation.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>How the Relay Works</h2>
+
+                    <h3>Message Flow</h3>
+
+                    <ol>
+                        <li>You make a change (e.g., <code>envctl env var set API_KEY=...</code>)</li>
+                        <li>The daemon encrypts the operation for each team member</li>
+                        <li>Online peers receive it directly via P2P</li>
+                        <li>For offline peers, the message is sent to the relay</li>
+                        <li>The relay stores the encrypted message</li>
+                        <li>When peers come online, they retrieve their messages</li>
+                    </ol>
+
+                    <h3>What the Relay Sees</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Visible to Relay?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Secret values</td>
+                                <td>No (encrypted)</td>
+                            </tr>
+                            <tr>
+                                <td>Variable names</td>
+                                <td>No (encrypted)</td>
+                            </tr>
+                            <tr>
+                                <td>Project name</td>
+                                <td>Yes (for routing)</td>
+                            </tr>
+                            <tr>
+                                <td>Sender/recipient IDs</td>
+                                <td>Yes (for routing)</td>
+                            </tr>
+                            <tr>
+                                <td>Message timestamps</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Message sizes</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>IP addresses</td>
+                                <td>Yes (connection logs)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>End-to-end encryption</strong></p>
+                        <p>The relay is a store-and-forward service. It can see metadata but never the contents of your secrets. Messages are encrypted with ML-KEM before leaving your machine.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Checking Relay Status</h2>
+
+                    <pre><code><span class="prompt">$</span> envctl project relay status
+<span class="dim">Relay Status for myapp:</span>
+
+  URL: wss://relay.envctl.dev/ws
+  Status: <span class="success">connected</span>
+  Last message: 2 minutes ago
+  Pending messages: 0</code></pre>
+
+                    <p>The daemon maintains a persistent WebSocket connection to the relay.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Removing the Relay</h2>
+
+                    <p>To disable relay sync and return to P2P-only:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project relay set ""
+<span class="success">✓</span> Relay disabled for myapp</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Troubleshooting</h2>
+
+                    <h3>Connection Issues</h3>
+
+                    <p>If the relay shows as disconnected:</p>
+
+                    <ol>
+                        <li><strong>Check network connectivity:</strong>
+                            <pre><code><span class="prompt">$</span> curl -I https://relay.envctl.dev
+HTTP/2 200</code></pre>
+                        </li>
+                        <li><strong>Check daemon status:</strong>
+                            <pre><code><span class="prompt">$</span> envctl daemon status
+<span class="success">✓</span> Daemon running (PID 12345)</code></pre>
+                        </li>
+                        <li><strong>Restart the daemon:</strong>
+                            <pre><code><span class="prompt">$</span> envctl daemon stop
+<span class="prompt">$</span> envctl daemon start</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Messages Not Syncing</h3>
+
+                    <p>If changes aren't reaching teammates:</p>
+
+                    <ol>
+                        <li>Verify relay is configured for all team members:
+                            <pre><code><span class="prompt">$</span> envctl project relay status</code></pre>
+                        </li>
+                        <li>Check that both parties have the daemon running</li>
+                        <li>Verify the recipient's fingerprint matches their actual identity</li>
+                    </ol>
+
+                    <h3>Rate Limiting (Free Tier)</h3>
+
+                    <p>The free tier has rate limits. If you see "rate limited" errors:</p>
+                    <ul>
+                        <li>Wait a few minutes and try again</li>
+                        <li>Upgrade to Pro for unlimited usage</li>
+                        <li>Batch your changes (fewer, larger updates)</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Privacy Considerations</h2>
+
+                    <p>While your secrets are encrypted, the relay does see some metadata:</p>
+
+                    <ul>
+                        <li><strong>Traffic patterns</strong> — When you sync, how often, message sizes</li>
+                        <li><strong>Team structure</strong> — Who communicates with whom</li>
+                        <li><strong>IP addresses</strong> — Where you're connecting from</li>
+                    </ul>
+
+                    <p>If this metadata is sensitive for your use case:</p>
+                    <ul>
+                        <li>Self-host a relay on your own infrastructure</li>
+                        <li>Use a VPN to mask IP addresses</li>
+                        <li>Stick to P2P-only (no relay)</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/concepts.html#relay">Core Concepts: Relay Servers</a></li>
+                        <li><a href="/docs/commands.html#relay">Command Reference: Relay commands</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                        <li><a href="https://status.envctl.dev" target="_blank" rel="noopener">Relay Status Page</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

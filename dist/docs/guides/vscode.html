@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>VS Code Extension — envctl Documentation</title>
+    <meta name="title" content="VS Code Extension — envctl Documentation">
+    <meta name="description" content="Manage envctl secrets directly from VS Code. Switch environments, view variables, and open terminals with secrets loaded.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/vscode.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/vscode.html">
+    <meta property="og:title" content="VS Code Extension — envctl Documentation">
+    <meta property="og:description" content="Manage envctl secrets directly from VS Code.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar">
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html" class="active">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>VS Code Extension</h1>
+                    <p class="docs-lead">Manage your envctl secrets directly from VS Code. Switch environments, view variables, and open terminals with secrets loaded.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Installation</h2>
+
+                    <ol>
+                        <li>Open VS Code</li>
+                        <li>Go to Extensions (Cmd/Ctrl+Shift+X)</li>
+                        <li>Search for "envctl"</li>
+                        <li>Click Install</li>
+                    </ol>
+
+                    <p>Or install from the command line:</p>
+
+                    <pre><code>code --install-extension uradical.envctl</code></pre>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Prerequisite</strong></p>
+                        <p>The envctl CLI must be installed and in your PATH. The extension uses the CLI for all operations.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Features</h2>
+
+                    <h3>Status Bar</h3>
+
+                    <p>The status bar shows your current project and environment:</p>
+
+                    <pre><code>myapp/dev</code></pre>
+
+                    <p>Click the status bar item to quickly switch environments. The status bar is color-coded:</p>
+
+                    <ul>
+                        <li><strong>Green</strong> — dev environment</li>
+                        <li><strong>Yellow</strong> — staging environment</li>
+                        <li><strong>Red</strong> — prod environment</li>
+                    </ul>
+
+                    <h3>Sidebar Panel</h3>
+
+                    <p>The ENVCTL panel in the sidebar shows:</p>
+
+                    <ul>
+                        <li>Current project and environment</li>
+                        <li>List of variables (values redacted)</li>
+                        <li>Daemon status</li>
+                        <li>Sync status</li>
+                    </ul>
+
+                    <h3>Command Palette</h3>
+
+                    <p>Access envctl commands via the Command Palette (Cmd/Ctrl+Shift+P):</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>envctl: Switch Environment</code></td>
+                                <td>Select a different environment</td>
+                            </tr>
+                            <tr>
+                                <td><code>envctl: List Variables</code></td>
+                                <td>Show variables in current environment</td>
+                            </tr>
+                            <tr>
+                                <td><code>envctl: Copy Variable</code></td>
+                                <td>Copy a variable value to clipboard</td>
+                            </tr>
+                            <tr>
+                                <td><code>envctl: Open Terminal</code></td>
+                                <td>Open terminal with secrets loaded</td>
+                            </tr>
+                            <tr>
+                                <td><code>envctl: Refresh Status</code></td>
+                                <td>Refresh the sidebar panel</td>
+                            </tr>
+                            <tr>
+                                <td><code>envctl: Start Daemon</code></td>
+                                <td>Start the envctl daemon</td>
+                            </tr>
+                            <tr>
+                                <td><code>envctl: Show Logs</code></td>
+                                <td>Open audit log in output panel</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Switching Environments</h2>
+
+                    <p>There are several ways to switch environments:</p>
+
+                    <ol>
+                        <li><strong>Status bar:</strong> Click the environment name in the status bar</li>
+                        <li><strong>Command palette:</strong> Run "envctl: Switch Environment"</li>
+                        <li><strong>Sidebar:</strong> Click the environment dropdown</li>
+                    </ol>
+
+                    <p>When you switch, the extension:</p>
+                    <ul>
+                        <li>Updates the status bar</li>
+                        <li>Refreshes the variable list</li>
+                        <li>Updates any integrated terminals (if configured)</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Opening Terminals with Secrets</h2>
+
+                    <p>Run "envctl: Open Terminal" to open a new terminal with secrets loaded:</p>
+
+                    <ol>
+                        <li>Open Command Palette (Cmd/Ctrl+Shift+P)</li>
+                        <li>Type "envctl: Open Terminal"</li>
+                        <li>Enter your passphrase if prompted</li>
+                        <li>A new terminal opens with secrets in the environment</li>
+                    </ol>
+
+                    <p>This is equivalent to running <code>envctl env shell</code> but integrated into VS Code.</p>
+
+                    <h3>Auto-Inject Terminals</h3>
+
+                    <p>Enable automatic secret injection for all new terminals:</p>
+
+                    <pre><code>// settings.json
+{
+  "envctl.autoInjectTerminal": true
+}</code></pre>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>Security note</strong></p>
+                        <p>Auto-injection means secrets are loaded into every terminal. Only enable this if you're comfortable with that behavior.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Viewing and Copying Variables</h2>
+
+                    <p>The sidebar shows all variables in your current environment. Values are redacted by default.</p>
+
+                    <p>To copy a variable value:</p>
+
+                    <ol>
+                        <li>Click the variable in the sidebar</li>
+                        <li>Click "Copy Value"</li>
+                        <li>Enter passphrase if prompted</li>
+                        <li>Value is copied to clipboard</li>
+                    </ol>
+
+                    <p>Or use the Command Palette: "envctl: Copy Variable"</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Settings</h2>
+
+                    <p>Configure the extension in VS Code settings:</p>
+
+                    <pre><code>// settings.json
+{
+  // Show status bar indicator
+  "envctl.showStatusBar": true,
+
+  // Auto-inject secrets into new terminals
+  "envctl.autoInjectTerminal": false,
+
+  // Environment color coding
+  "envctl.environmentColors": {
+    "dev": "green",
+    "staging": "yellow",
+    "prod": "red"
+  },
+
+  // Custom path to envctl binary (if not in PATH)
+  "envctl.envctlPath": "/usr/local/bin/envctl",
+
+  // Status refresh interval (ms)
+  "envctl.pollIntervalMs": 5000
+}</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Troubleshooting</h2>
+
+                    <h3>"envctl not found"</h3>
+
+                    <p>The extension can't find the envctl binary. Either:</p>
+                    <ul>
+                        <li>Install envctl and ensure it's in your PATH</li>
+                        <li>Set <code>envctl.envctlPath</code> to the full path</li>
+                    </ul>
+
+                    <h3>"No identity found"</h3>
+
+                    <p>Run <code>envctl init</code> in a terminal to create your identity.</p>
+
+                    <h3>"Not in a project"</h3>
+
+                    <p>Open a folder that contains an envctl project (has a <code>.envctl/</code> directory).</p>
+
+                    <h3>Status bar not showing</h3>
+
+                    <p>Check that <code>envctl.showStatusBar</code> is set to <code>true</code> in settings.</p>
+
+                    <h3>Variables not updating</h3>
+
+                    <p>Run "envctl: Refresh Status" from the Command Palette, or check that the daemon is running.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/getting-started.html">Getting Started</a> — Install envctl CLI</li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a> — Managing environments</li>
+                        <li><a href="https://marketplace.visualstudio.com/items?itemName=uradical.envctl" target="_blank" rel="noopener">VS Code Marketplace</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

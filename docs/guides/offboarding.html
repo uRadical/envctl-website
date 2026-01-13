@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Team Member Offboarding — envctl Documentation</title>
+    <meta name="title" content="Team Member Offboarding — envctl Documentation">
+    <meta name="description" content="How to securely remove team members from envctl projects. Revoke access, identify affected secrets, rotate credentials, and verify removal is complete.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/offboarding.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/offboarding.html">
+    <meta property="og:title" content="Team Member Offboarding — envctl Documentation">
+    <meta property="og:description" content="Securely remove team members and rotate affected secrets.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html" class="active">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Team Member Offboarding</h1>
+                    <p class="docs-lead">When a team member leaves, you need to revoke their access and rotate any secrets they had visibility into. envctl makes this process explicit and auditable.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Why Rotation Matters</h2>
+
+                    <p>Removing someone from a project revokes their ability to receive future updates, but they still have copies of the secrets they previously had access to. These copies exist on their local machine, potentially in backups, or in their memory.</p>
+
+                    <p>For true security, you must:</p>
+                    <ol>
+                        <li><strong>Revoke access</strong> — Stop them from receiving new secrets</li>
+                        <li><strong>Rotate secrets</strong> — Change the values of secrets they had access to</li>
+                        <li><strong>Update CI bundles</strong> — Re-export encrypted bundles with new secrets</li>
+                    </ol>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>Removal alone is not enough</strong></p>
+                        <p>Simply removing a team member does not invalidate the secrets they've already seen. Always rotate secrets after removing someone, especially for production environments.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 1: Review Their Access</h2>
+
+                    <p>Before removing someone, understand what they had access to:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project access bob
+<span class="dim">Access for bob in myproject:</span>
+
+Environment   Role      Since
+-----------   ----      -----
+dev           member    2024-01-10
+staging       member    2024-01-10
+prod          reader    2024-02-15</code></pre>
+
+                    <p>This shows which environments Bob could access and their role in each. Roles determine what they could do:</p>
+
+                    <ul>
+                        <li><strong>reader</strong> — Can view secrets but not modify them</li>
+                        <li><strong>member</strong> — Can view and modify secrets</li>
+                        <li><strong>admin</strong> — Can manage members and environments</li>
+                    </ul>
+
+                    <p>All roles can see secret values, so all environments they had access to need rotation.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 2: Remove from Project</h2>
+
+                    <p>Remove the team member from the project. After removal, envctl will prompt you to rotate secrets:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project remove bob
+Remove 'bob' from project? [y/N] y
+Member 'bob' removed.
+
+'bob' had access to: dev, staging, prod
+
+SECURITY: The removed member may have copied secret values.
+You should set NEW values for sensitive secrets (API keys, passwords, etc.)
+
+Rotate secrets for these environments? [Y/n] y
+
+Rotating secrets for myproject/prod...
+<span class="dim"># Opens $EDITOR - update secrets with NEW values, save and close</span>
+  Updated: DATABASE_URL, API_KEY, STRIPE_SECRET
+Rotating secrets for myproject/staging...
+<span class="dim"># Opens $EDITOR again for staging</span>
+  Updated: DATABASE_URL, API_KEY
+Rotating secrets for myproject/dev...
+<span class="dim"># Opens $EDITOR again for dev</span>
+  Updated: DATABASE_URL
+
+Done. Updated secrets will be synced to team members when the daemon is running.</code></pre>
+
+                    <p>This does several things:</p>
+                    <ul>
+                        <li>Removes their membership from the project chain</li>
+                        <li>Prevents them from receiving new sync messages</li>
+                        <li>Revokes their ability to decrypt future secrets</li>
+                        <li>Prompts to rotate secrets in each environment they had access to</li>
+                    </ul>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Editor-based rotation</strong></p>
+                        <p>When you choose to rotate secrets, envctl opens your <code>$EDITOR</code> for each environment. The file shows all current secrets with helpful comments explaining what needs to be done. Update any sensitive values (API keys, passwords, tokens) with NEW values from your service providers, then save and close.</p>
+                    </div>
+
+                    <p>Use <code>--silent</code> to skip all prompts (useful for scripts, but remember to rotate secrets separately):</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project remove bob --silent
+Member 'bob' removed.</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 3: Identify Secrets to Rotate</h2>
+
+                    <p>envctl tracks who has seen which secrets. View the secrets Bob had access to:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env var list -e dev
+<span class="dim">Variables in myproject/dev:</span>
+
+DATABASE_URL      = postgres://... <span class="dim">(set by alice, 2024-01-10)</span>
+API_KEY           = sk_dev_...     <span class="dim">(set by bob, 2024-02-01)</span>
+STRIPE_KEY        = pk_test_...    <span class="dim">(set by alice, 2024-01-15)</span></code></pre>
+
+                    <p>All secrets in environments Bob had access to should be considered compromised and rotated.</p>
+
+                    <h3>Check the Audit Log</h3>
+
+                    <p>For a detailed view of what Bob accessed:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl log --search bob --since 90d
+2024-03-01 14:20  bob  Pulled secrets (dev: 3, staging: 3, prod: 2)
+2024-02-28 09:15  bob  Set API_KEY in dev
+2024-02-15 11:30  alice  Granted bob reader access to prod
+2024-02-01 10:00  bob  Set API_KEY in dev
+2024-01-10 09:00  alice  Added bob to project</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 4: Rotate Affected Secrets</h2>
+
+                    <p>If you used the integrated rotation prompt in Step 2, you've already rotated secrets in the editor. This section covers what you need to do at the service level and how to rotate manually if needed.</p>
+
+                    <h3>What "Rotation" Really Means</h3>
+
+                    <p>Rotating a secret involves two steps:</p>
+                    <ol>
+                        <li><strong>Generate new credentials</strong> at the actual service (database, API provider, etc.)</li>
+                        <li><strong>Update the secret</strong> in envctl with the new value</li>
+                    </ol>
+
+                    <p>Simply changing the value in envctl isn't enough—you need to create a genuinely new credential at the source.</p>
+
+                    <h3>Example: Rotating Database Credentials</h3>
+
+                    <ol>
+                        <li>Create a new database user or password in your database</li>
+                        <li>Update the secret in envctl (in the editor, or manually):
+                            <pre><code><span class="prompt">$</span> envctl env var set -e prod DATABASE_URL=postgres://newuser:newpass@host/db
+<span class="success">✓</span> Set DATABASE_URL in prod</code></pre>
+                        </li>
+                        <li>Deploy your application with the new credentials</li>
+                        <li>Delete the old database user or password</li>
+                    </ol>
+
+                    <h3>Example: Rotating API Keys</h3>
+
+                    <ol>
+                        <li>Generate a new API key from the service provider</li>
+                        <li>Update the secret (in the editor, or manually):
+                            <pre><code><span class="prompt">$</span> envctl env var set -e prod API_KEY=sk_live_new_key_here
+<span class="success">✓</span> Set API_KEY in prod</code></pre>
+                        </li>
+                        <li>Revoke the old API key from the service provider</li>
+                    </ol>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Rotate in order of sensitivity</strong></p>
+                        <p>The integrated rotation prompt handles environments in the order the member had access, but if you're doing it manually, start with production secrets, then staging, then development.</p>
+                    </div>
+
+                    <h3>Manual Rotation (Alternative)</h3>
+
+                    <p>If you skipped the rotation prompt or need to rotate additional secrets later, use the editor command:</p>
+
+                    <pre><code><span class="dim"># Edit secrets in an environment</span>
+<span class="prompt">$</span> envctl env edit -e prod
+<span class="dim"># Opens $EDITOR with all secrets - make changes, save and close</span>
+
+<span class="dim"># Or set individual secrets</span>
+<span class="prompt">$</span> envctl env var set -e prod DATABASE_URL=postgres://newuser:newpass@host/db
+<span class="prompt">$</span> envctl env var set -e prod API_KEY=sk_prod_new_key</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 5: Update CI Bundles</h2>
+
+                    <p>If you use envctl for CI/CD, re-export your encrypted bundles with the new secrets:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc
+Exported 8 variables to .envctl/prod.enc
+
+<span class="prompt">$</span> envctl ci export -e staging -o .envctl/staging.enc
+Exported 6 variables to .envctl/staging.enc
+
+<span class="prompt">$</span> git add .envctl/*.enc
+<span class="prompt">$</span> git commit -m "Rotate secrets after team change"
+<span class="prompt">$</span> git push</code></pre>
+
+                    <p>Your CI pipelines will automatically use the new secrets on the next run.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 6: Verify Removal</h2>
+
+                    <p>Confirm the team member has been removed:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project members
+<span class="dim">Members of myproject:</span>
+
+Name          Role    Environments         Joined
+----          ----    ------------         ------
+alice         admin   dev, staging, prod   2024-01-05
+charlie       member  dev, staging         2024-01-20
+
+<span class="dim">2 members total</span></code></pre>
+
+                    <p>Bob no longer appears in the member list.</p>
+
+                    <h3>Verify in the Audit Log</h3>
+
+                    <pre><code><span class="prompt">$</span> envctl project log | head
+2024-03-01 16:00  alice  Removed bob (reason: Left company)
+2024-03-01 16:05  alice  Set DATABASE_URL in prod
+2024-03-01 16:05  alice  Set API_KEY in prod
+...</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Notify Remaining Team</h2>
+
+                    <p>After rotating secrets, remaining team members need to sync:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl pull
+<span class="success">✓</span> Pulled 6 updates from alice
+  prod: 3 variables changed
+  staging: 2 variables changed
+  dev: 1 variable changed</code></pre>
+
+                    <p>If using the relay, syncing happens automatically. For P2P-only setups, team members may need to be online at the same time or manually pull updates.</p>
+
+                    <p>Team members should also update their local <code>.env</code> files:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl env use dev
+<span class="success">✓</span> .env written (3 secrets)</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Best Practices</h2>
+
+                    <h3>Create an Offboarding Checklist</h3>
+
+                    <p>For your organization, maintain a checklist of secrets that need rotation when someone leaves. Group them by service:</p>
+
+                    <ul>
+                        <li><strong>Database</strong> — DATABASE_URL, REDIS_URL</li>
+                        <li><strong>Payment</strong> — STRIPE_SECRET, STRIPE_WEBHOOK_SECRET</li>
+                        <li><strong>Email</strong> — SENDGRID_API_KEY, SMTP_PASSWORD</li>
+                        <li><strong>Cloud</strong> — AWS_SECRET_ACCESS_KEY, GCP_SERVICE_ACCOUNT</li>
+                        <li><strong>Third-party APIs</strong> — TWILIO_AUTH_TOKEN, GITHUB_TOKEN</li>
+                    </ul>
+
+                    <h3>Use Environment-Based Access Control</h3>
+
+                    <p>Limit who has access to production:</p>
+
+                    <pre><code><span class="dim"># Grant dev/staging access to new developers</span>
+<span class="prompt">$</span> envctl project grant alice --env dev,staging
+
+<span class="dim"># Only grant prod access when needed</span>
+<span class="prompt">$</span> envctl project grant alice --env prod</code></pre>
+
+                    <p>This minimizes the rotation scope when someone leaves—if they only had dev access, you only need to rotate dev secrets.</p>
+
+                    <h3>Schedule Regular Rotation</h3>
+
+                    <p>Don't wait for offboarding to rotate secrets. Consider:</p>
+
+                    <ul>
+                        <li>Rotating production secrets quarterly</li>
+                        <li>Rotating after any security incident</li>
+                        <li>Rotating when contractors complete projects</li>
+                    </ul>
+
+                    <h3>Document in the Audit Log</h3>
+
+                    <p>Use descriptive reasons when removing members:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl project remove bob --reason "Contract ended 2024-03-01"</code></pre>
+
+                    <p>This creates a permanent record in the project chain that's visible to all admins.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Emergency Removal</h2>
+
+                    <p>If you suspect a security incident or need to remove someone immediately:</p>
+
+                    <ol>
+                        <li><strong>Remove immediately:</strong>
+                            <pre><code><span class="prompt">$</span> envctl project remove compromised-user --reason "Security incident"</code></pre>
+                        </li>
+                        <li><strong>Rotate production secrets first:</strong>
+                            <pre><code><span class="prompt">$</span> envctl env var set -e prod CRITICAL_SECRET=new_value</code></pre>
+                        </li>
+                        <li><strong>Re-export CI bundles:</strong>
+                            <pre><code><span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc && git add .envctl/prod.enc && git commit -m "Emergency rotation" && git push</code></pre>
+                        </li>
+                        <li><strong>Deploy with new secrets</strong></li>
+                        <li><strong>Rotate remaining environments</strong></li>
+                        <li><strong>Review audit logs for suspicious activity</strong></li>
+                    </ol>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a> — How to add new team members</li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a> — General security recommendations</li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a> — Managing access per environment</li>
+                        <li><a href="/docs/commands.html#project-remove">Command Reference: project remove</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Command Reference — envctl Documentation</title>
+    <meta name="title" content="Command Reference — envctl Documentation">
+    <meta name="description" content="Complete reference for all envctl commands. Includes synopsis, options, examples, and related commands for identity, project, environment, and CI operations.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/commands.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/commands.html">
+    <meta property="og:title" content="Command Reference — envctl Documentation">
+    <meta property="og:description" content="Complete reference for all envctl commands.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html" class="active">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Command Reference</h1>
+                    <p class="docs-lead">Complete reference for all envctl commands, organized by category.</p>
+                </header>
+
+                <nav class="docs-section">
+                    <h2>Quick Navigation</h2>
+                    <ul>
+                        <li><a href="#identity">Identity Commands</a> — init, whoami</li>
+                        <li><a href="#project">Project Commands</a> — create, delete, invite, join, remove, members, leave, link, grant, revoke, access</li>
+                        <li><a href="#project-governance">Governance Commands</a> — pending, approve, deny, log, dissolve, invites, revoke-invite</li>
+                        <li><a href="#environment">Environment Commands</a> — list, create, delete, use, apply, shell, clear, edit</li>
+                        <li><a href="#variables">Variable Commands</a> — set, delete, list</li>
+                        <li><a href="#sync">Sync Commands</a> — status, log, push, pull</li>
+                        <li><a href="#relay">Relay Commands</a> — relay set, relay status</li>
+                        <li><a href="#daemon">Daemon Commands</a> — start, stop, run, status, env, install, uninstall</li>
+                        <li><a href="#ci">CI Commands</a> — keygen, export, apply</li>
+                        <li><a href="#utility">Utility Commands</a> — doctor</li>
+                    </ul>
+                </nav>
+
+                <!-- Identity Commands -->
+                <section class="docs-section" id="identity">
+                    <h2>Identity Commands</h2>
+
+                    <div class="docs-command" id="init">
+                        <h3>envctl init</h3>
+                        <p>Initialize your identity by generating a cryptographic keypair.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl init [flags]</code>
+                        </div>
+
+                        <p>This must be run before using any other envctl commands. Your identity is stored in <code>~/.config/envctl/</code> and protected by a passphrase.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--name &lt;name&gt;</dt>
+                            <dd>Set a custom display name (default: username-hostname)</dd>
+
+                            <dt>--keychain</dt>
+                            <dd>Store passphrase in the system keychain for automatic unlock</dd>
+
+                            <dt>--yubikey</dt>
+                            <dd>Store the private key on a YubiKey for hardware-backed security</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="dim"># Basic initialization</span>
+<span class="prompt">$</span> envctl init
+
+<span class="dim"># With a custom name</span>
+<span class="prompt">$</span> envctl init --name alice-work-laptop
+
+<span class="dim"># With keychain storage (no passphrase prompts)</span>
+<span class="prompt">$</span> envctl init --keychain
+
+<span class="dim"># With YubiKey</span>
+<span class="prompt">$</span> envctl init --yubikey</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#whoami">whoami</a></p>
+                    </div>
+
+                    <div class="docs-command" id="whoami">
+                        <h3>envctl whoami</h3>
+                        <p>Display your identity information.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl whoami [--verbose]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--verbose</dt>
+                            <dd>Show full public key (useful for sharing)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl whoami
+Name: alice-macbook
+Fingerprint: sha256:7f3a9b2c4d5e6f7a...
+
+<span class="prompt">$</span> envctl whoami --verbose
+Name: alice-macbook
+Fingerprint: sha256:7f3a9b2c4d5e6f7a8b9c0d1e...
+Public key: 7f3a9b2c4d5e6f7a8b9c0d1e2f3a4b5c...</code></pre>
+                    </div>
+                </section>
+
+                <!-- Project Commands -->
+                <section class="docs-section" id="project">
+                    <h2>Project Commands</h2>
+
+                    <div class="docs-command" id="project-create">
+                        <h3>envctl project create</h3>
+                        <p>Create a new project and link it to the current directory.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project create [name] [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--envs &lt;names&gt;</dt>
+                            <dd>Comma-separated list of environments to create (default: dev,stage,prod)</dd>
+
+                            <dt>--default-access &lt;env&gt;</dt>
+                            <dd>Default environment access for new members (default: dev)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="dim"># Create with default environments</span>
+<span class="prompt">$</span> envctl project create myapp
+
+<span class="dim"># Create with custom environments</span>
+<span class="prompt">$</span> envctl project create myapp --envs dev,qa,stage,prod
+
+<span class="dim"># Create with custom default access for new members</span>
+<span class="prompt">$</span> envctl project create myapp --envs local,test,live --default-access local</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#join">join</a>, <a href="#project-invite">project invite</a></p>
+                    </div>
+
+                    <div class="docs-command" id="project-delete">
+                        <h3>envctl project delete</h3>
+                        <p>Delete a project's local chain file.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project delete &lt;project-name&gt; [flags]</code>
+                        </div>
+
+                        <p>This is a local-only operation that removes your copy of the project's chain. Other project members still have their copies and can continue using the project. Use this to clean up test projects or projects you no longer participate in.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--silent</dt>
+                            <dd>Delete without confirmation prompt</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project delete testproject
+Delete local chain for 'testproject'? [y/N] y
+<span class="success">✓</span> Deleted testproject
+
+<span class="prompt">$</span> envctl project delete testproject --silent
+<span class="success">✓</span> Deleted testproject</code></pre>
+
+                        <p><strong>Note:</strong> This does NOT remove you from the project or notify other members. To formally leave a project, use <a href="#project-leave">project leave</a> instead.</p>
+                    </div>
+
+                    <div class="docs-command" id="project-invite">
+                        <h3>envctl project invite</h3>
+                        <p>Invite a team member to the project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project invite &lt;name&gt; --pubkey &lt;key&gt; [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--pubkey &lt;key&gt; (required)</dt>
+                            <dd>The invitee's public key (from <code>envctl whoami --verbose</code>)</dd>
+
+                            <dt>--ttl &lt;duration&gt;</dt>
+                            <dd>How long the invite is valid (default: 10m)</dd>
+
+                            <dt>--env &lt;names&gt;</dt>
+                            <dd>Environments to grant access to (default: dev)</dd>
+
+                            <dt>--role &lt;role&gt;</dt>
+                            <dd>Role to assign: admin, member, or reader (default: member)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="dim"># Basic invite</span>
+<span class="prompt">$</span> envctl project invite bob --pubkey 8d4e2f1a...
+<span class="success">✓</span> Invitation created
+  Share this with bob: envctl join eyJwcm9qZWN0...
+
+<span class="dim"># Invite with specific environments</span>
+<span class="prompt">$</span> envctl project invite bob --pubkey 8d4e2f1a... --env dev,staging
+
+<span class="dim"># Invite as admin with prod access</span>
+<span class="prompt">$</span> envctl project invite bob --pubkey 8d4e2f1a... --env dev,staging,prod --role admin</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#join">join</a>, <a href="#project-remove">project remove</a></p>
+                    </div>
+
+                    <div class="docs-command" id="project-remove">
+                        <h3>envctl project remove</h3>
+                        <p>Remove a team member from the project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project remove &lt;name&gt; [flags]</code>
+                        </div>
+
+                        <p>After removal, you'll be prompted to rotate secrets for environments the member had access to. This opens your editor for each environment so you can set <strong>new</strong> values for sensitive secrets (API keys, passwords, etc.) that the removed member may have copied.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-s, --silent</dt>
+                            <dd>Skip all prompts (removal confirmation and rotation prompt)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project remove bob
+Remove 'bob' from project? [y/N] y
+Member 'bob' removed.
+
+'bob' had access to: dev, stage
+
+SECURITY: The removed member may have copied secret values.
+You should set NEW values for sensitive secrets (API keys, passwords, etc.)
+
+Rotate secrets for these environments? [Y/n] y
+
+Rotating secrets for myapp/dev...
+<span class="dim"># Opens $EDITOR with current values - update secrets as needed</span>
+  Updated: DATABASE_PASSWORD, API_KEY
+Rotating secrets for myapp/stage...
+<span class="dim"># Opens $EDITOR again for the stage environment</span>
+  Updated: DATABASE_PASSWORD
+
+Done. Updated secrets will be synced to team members when the daemon is running.
+
+<span class="dim"># Silent mode - skip all prompts</span>
+<span class="prompt">$</span> envctl project remove bob --silent
+Member 'bob' removed.</code></pre>
+
+                        <p><strong>Related:</strong> <a href="/docs/guides/offboarding.html">Offboarding guide</a></p>
+                    </div>
+
+                    <div class="docs-command" id="join">
+                        <h3>envctl join</h3>
+                        <p>Join an existing project using an invitation code.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl join &lt;invite-code&gt;</code>
+                        </div>
+
+                        <p>Run this command in the directory where you want to work on the project. The invite code is provided by an existing project member.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> cd ~/projects/myapp
+<span class="prompt">$</span> envctl join eyJwcm9qZWN0IjoibXlhcHAi...
+<span class="success">✓</span> Joined project "myapp"
+  Environments: dev, staging
+Syncing secrets...</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#project-invite">project invite</a></p>
+                    </div>
+
+                    <div class="docs-command" id="project-members">
+                        <h3>envctl project members</h3>
+                        <p>List all members of the project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project members [project]</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project members
+<span class="dim">Members of myapp:</span>
+
+alice (admin)     dev, staging, prod
+bob (member)      dev, staging
+carol (reader)    dev</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-leave">
+                        <h3>envctl project leave</h3>
+                        <p>Leave the current project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project leave</code>
+                        </div>
+
+                        <p>Any member can leave a project at any time. The last admin cannot leave (must promote another admin first).</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project leave
+Leave project 'myapp'? [y/N] y
+<span class="success">✓</span> Left project myapp</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-link">
+                        <h3>envctl project link</h3>
+                        <p>Link the current directory to an existing project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project link &lt;project-name&gt;</code>
+                        </div>
+
+                        <p>Use this when you want to work with a project that was created elsewhere or shared by a team member. The project must exist in your local chains directory.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> cd ~/work/backend
+<span class="prompt">$</span> envctl project link myapp
+<span class="success">✓</span> Linked directory to project 'myapp'
+Default environment: dev
+
+You can now use:
+  envctl fetch dev    # Get secrets sent by team members
+  envctl use dev      # Decrypt local secrets</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-access">
+                        <h3>envctl project access</h3>
+                        <p>Show environment access for all members.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project access</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project access
+<span class="dim">Environment Access for myapp:</span>
+
+          dev    staging    prod
+alice      ✓        ✓        ✓
+bob        ✓        ✓        -
+carol      ✓        -        -</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-grant">
+                        <h3>envctl project grant</h3>
+                        <p>Grant a member access to additional environments.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project grant &lt;member&gt; --env &lt;envs&gt;</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--env &lt;names&gt; (required)</dt>
+                            <dd>Comma-separated list of environments to grant</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project grant bob --env staging
+<span class="success">✓</span> Granted bob access to staging
+
+<span class="prompt">$</span> envctl project grant bob --env staging,prod</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-revoke">
+                        <h3>envctl project revoke</h3>
+                        <p>Revoke a member's access to environments.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project revoke &lt;member&gt; --env &lt;envs&gt;</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--env &lt;names&gt; (required)</dt>
+                            <dd>Comma-separated list of environments to revoke</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project revoke bob --env prod
+<span class="success">✓</span> Revoked bob's access to prod</code></pre>
+                    </div>
+                </section>
+
+                <!-- Project Governance Commands -->
+                <section class="docs-section" id="project-governance">
+                    <h2>Governance Commands</h2>
+                    <p>These commands manage proposals and approvals in multi-admin projects.</p>
+
+                    <div class="docs-command" id="project-pending">
+                        <h3>envctl project pending</h3>
+                        <p>Show pending proposals that require approval.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project pending</code>
+                        </div>
+
+                        <p>In multi-admin projects, sensitive operations (member removal, dissolution) require approval from other admins.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project pending
+<span class="dim">Pending proposals for myapp:</span>
+
+#1  Remove member 'bob'
+    Proposed by: alice (2 hours ago)
+    Approvals: 1/2 required
+
+#2  Grant staging access to carol
+    Proposed by: alice (1 hour ago)
+    Approvals: 1/1 required (auto-approve)</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#project-approve">project approve</a>, <a href="#project-deny">project deny</a></p>
+                    </div>
+
+                    <div class="docs-command" id="project-approve">
+                        <h3>envctl project approve</h3>
+                        <p>Approve a pending proposal.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project approve &lt;id&gt;</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project approve 1
+<span class="success">✓</span> Approved proposal #1 (Remove member 'bob')
+  Awaiting 1 more approval</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-deny">
+                        <h3>envctl project deny</h3>
+                        <p>Deny a pending proposal.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project deny &lt;id&gt;</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project deny 1
+<span class="success">✓</span> Denied proposal #1 (Remove member 'bob')</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-log">
+                        <h3>envctl project log</h3>
+                        <p>Show the project's blockchain history.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project log</code>
+                        </div>
+
+                        <p>Displays all membership changes, access grants, and other governance actions recorded on the chain.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project log
+<span class="dim">Chain history for myapp (height: 12):</span>
+
+#12  grant_access     alice granted carol access to dev
+#11  member_add       carol joined as reader
+#10  revoke_access    alice revoked bob's prod access
+#9   grant_access     alice granted bob access to staging
+...
+#1   genesis          alice created project</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-dissolve">
+                        <h3>envctl project dissolve</h3>
+                        <p>Dissolve a project (requires admin consensus).</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project dissolve &lt;project-name&gt; [flags]</code>
+                        </div>
+
+                        <p>This creates a dissolution proposal. In multi-admin projects, other admins must approve. Once dissolved, the project cannot accept new blocks.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--reason &lt;text&gt;</dt>
+                            <dd>Reason for dissolution (recorded in chain)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project dissolve oldproject --reason "Project completed"
+<span class="warning">!</span> Dissolution requires approval from 2 admins
+<span class="success">✓</span> Created dissolution proposal</code></pre>
+
+                        <p><strong>Warning:</strong> Dissolution cannot be undone. Dissolved projects remain visible for historical record but cannot be modified.</p>
+                    </div>
+
+                    <div class="docs-command" id="project-invites">
+                        <h3>envctl project invites</h3>
+                        <p>List all invites for the project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project invites [project]</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project invites
+<span class="dim">Invites for myapp:</span>
+
+ABC-DEF-GHI  valid     bob (member)      expires in 8m
+XYZ-123-456  expired   carol (reader)    expired 2h ago
+QWE-RTY-UIO  used      dave (member)     joined yesterday</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="project-revoke-invite">
+                        <h3>envctl project revoke-invite</h3>
+                        <p>Revoke an unused invite code.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project revoke-invite &lt;code&gt; [flags]</code>
+                        </div>
+
+                        <p>Only valid (unused, non-expired) invites can be revoked.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--reason &lt;text&gt;</dt>
+                            <dd>Reason for revocation (recorded in chain)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project revoke-invite ABC-DEF-GHI --reason "Wrong person"
+<span class="success">✓</span> Revoked invite ABC-DEF-GHI</code></pre>
+                    </div>
+                </section>
+
+                <!-- Environment Commands -->
+                <section class="docs-section" id="environment">
+                    <h2>Environment Commands</h2>
+
+                    <div class="docs-command" id="env-list">
+                        <h3>envctl env list</h3>
+                        <p>List all environments in the current project.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env list</code>
+                            <br><code>envctl env ls</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env list
+<span class="dim">Environments for myapp:</span>
+
+* dev          (3 members)
+  staging      (2 members)
+  prod         (1 member)</code></pre>
+
+                        <p>The asterisk (*) indicates your current environment.</p>
+                    </div>
+
+                    <div class="docs-command" id="env-create">
+                        <h3>envctl env create</h3>
+                        <p>Create a new environment.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env create &lt;name&gt;</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env create qa
+<span class="success">✓</span> Created environment 'qa'</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="env-delete">
+                        <h3>envctl env delete</h3>
+                        <p>Delete an environment and all its secrets.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env delete &lt;name&gt; [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--force</dt>
+                            <dd>Skip confirmation prompt</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env delete qa
+Delete environment 'qa' and all its secrets? [y/N] y
+<span class="success">✓</span> Deleted environment 'qa'</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="env-use">
+                        <h3>envctl env use</h3>
+                        <p>Switch to an environment and write a .env file.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env use &lt;name&gt; [flags]</code>
+                        </div>
+
+                        <p>Decrypts secrets for the specified environment and writes them to a <code>.env</code> file in the current directory.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--no-overrides</dt>
+                            <dd>Ignore local <code>.env.&lt;name&gt;</code> override files</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env use dev
+Passphrase:
+<span class="success">✓</span> .env written (3 secrets)
+
+<span class="prompt">$</span> envctl env use staging --no-overrides
+<span class="success">✓</span> .env written (5 secrets)</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#env-apply">env apply</a>, <a href="#env-shell">env shell</a></p>
+                    </div>
+
+                    <div class="docs-command" id="env-apply">
+                        <h3>envctl env apply</h3>
+                        <p>Run a command with secrets injected into the environment.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env apply [flags] -- &lt;command&gt;</code>
+                        </div>
+
+                        <p>Secrets are injected directly into the process environment without writing a .env file to disk.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to use (default: current)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="dim"># Run npm start with dev secrets</span>
+<span class="prompt">$</span> envctl env apply -- npm start
+
+<span class="dim"># Run with production secrets</span>
+<span class="prompt">$</span> envctl env apply -e prod -- ./deploy.sh
+
+<span class="dim"># Run tests with staging secrets</span>
+<span class="prompt">$</span> envctl env apply -e staging -- npm test</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#env-shell">env shell</a>, <a href="#env-use">env use</a></p>
+                    </div>
+
+                    <div class="docs-command" id="env-shell">
+                        <h3>envctl env shell</h3>
+                        <p>Open an interactive shell with secrets loaded.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env shell [flags]</code>
+                        </div>
+
+                        <p>Starts your default shell (bash, zsh, etc.) with secrets in the environment. Type <code>exit</code> to leave and clear secrets from memory.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to use (default: current)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env shell
+Starting bash with 3 secrets from myapp/dev
+Type 'exit' to leave and clear secrets from memory.
+
+<span class="prompt">$</span> echo $API_KEY
+sk_dev_abc123
+
+<span class="prompt">$</span> exit
+Exited envctl shell. Secrets cleared.</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="env-clear">
+                        <h3>envctl env clear</h3>
+                        <p>Remove the .env file from the current directory.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env clear</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env clear
+<span class="success">✓</span> Removed .env</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="env-edit">
+                        <h3>envctl env edit</h3>
+                        <p>Edit environment variables interactively in your default editor.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env edit [flags]</code>
+                        </div>
+
+                        <p>Opens a temporary file with your secrets in <code>$EDITOR</code>. Changes are saved when you close the editor.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to edit (default: current)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env edit
+<span class="dim"># Opens $EDITOR with secrets</span>
+<span class="success">✓</span> Updated 2 variables</code></pre>
+                    </div>
+                </section>
+
+                <!-- Variable Commands -->
+                <section class="docs-section" id="variables">
+                    <h2>Variable Commands</h2>
+
+                    <div class="docs-command" id="env-var-set">
+                        <h3>envctl env var set</h3>
+                        <p>Set an environment variable.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env var set KEY=value [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to modify (default: current)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="dim"># Set in current environment</span>
+<span class="prompt">$</span> envctl env var set DATABASE_URL=postgres://localhost/mydb
+<span class="success">✓</span> Set DATABASE_URL in dev
+
+<span class="dim"># Set in specific environment</span>
+<span class="prompt">$</span> envctl env var set -e prod DATABASE_URL=postgres://prod-db/mydb
+<span class="success">✓</span> Set DATABASE_URL in prod
+
+<span class="dim"># Set multiple variables</span>
+<span class="prompt">$</span> envctl env var set API_KEY=sk_live_abc123
+<span class="prompt">$</span> envctl env var set STRIPE_KEY=pk_live_xyz789</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#env-var-delete">env var delete</a>, <a href="#env-var-list">env var list</a></p>
+                    </div>
+
+                    <div class="docs-command" id="env-var-delete">
+                        <h3>envctl env var delete</h3>
+                        <p>Delete an environment variable.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env var delete &lt;KEY&gt; [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to modify (default: current)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env var delete OLD_API_KEY
+<span class="success">✓</span> Deleted OLD_API_KEY from dev</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="env-var-list">
+                        <h3>envctl env var list</h3>
+                        <p>List all variables in an environment.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl env var list [flags]</code>
+                            <br><code>envctl env var ls [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to list (default: current)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl env var list
+<span class="dim">Variables in myapp/dev:</span>
+
+DATABASE_URL = postgres://localhost/mydb
+API_KEY      = sk_de...23 <span class="dim">(redacted)</span>
+DEBUG        = true</code></pre>
+                    </div>
+                </section>
+
+                <!-- Sync Commands -->
+                <section class="docs-section" id="sync">
+                    <h2>Sync Commands</h2>
+
+                    <div class="docs-command" id="status">
+                        <h3>envctl status</h3>
+                        <p>Show the current project and sync status.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl status</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl status
+Project: myapp
+Environment: dev (3 secrets)
+<span class="success">✓</span> Synced with 2 peers
+
+<span class="dim"># When out of sync</span>
+<span class="prompt">$</span> envctl status
+Project: myapp
+Environment: dev (3 secrets)
+<span class="warning">!</span> 2 pending updates from alice</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="log">
+                        <h3>envctl log</h3>
+                        <p>View the audit log of changes.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl log [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--since &lt;duration&gt;</dt>
+                            <dd>Show logs since (e.g., 1h, 24h, 7d)</dd>
+
+                            <dt>--search &lt;text&gt;</dt>
+                            <dd>Filter by text (author name, variable name, etc.)</dd>
+
+                            <dt>--limit &lt;n&gt;</dt>
+                            <dd>Maximum entries to show</dd>
+
+                            <dt>--follow</dt>
+                            <dd>Stream new entries as they arrive</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl log
+2024-03-01 14:30  alice  Set API_KEY in prod
+2024-03-01 14:28  alice  Set DATABASE_URL in prod
+2024-02-28 10:00  bob    Set STRIPE_KEY in dev
+
+<span class="prompt">$</span> envctl log --since 24h --search alice</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="push">
+                        <h3>envctl push</h3>
+                        <p>Push local changes to connected peers.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl push</code>
+                        </div>
+
+                        <p>Usually sync is automatic when the daemon is running. Use this command to force an immediate push.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl push
+<span class="success">✓</span> Pushed 3 operations to 2 peers</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="pull">
+                        <h3>envctl pull</h3>
+                        <p>Pull changes from connected peers.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl pull</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl pull
+<span class="success">✓</span> Pulled 5 operations from alice
+  dev: 2 variables changed
+  staging: 3 variables changed</code></pre>
+                    </div>
+                </section>
+
+                <!-- Relay Commands -->
+                <section class="docs-section" id="relay">
+                    <h2>Relay Commands</h2>
+
+                    <div class="docs-command" id="relay-set">
+                        <h3>envctl project relay set</h3>
+                        <p>Configure a relay server for async sync.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project relay set &lt;url&gt;</code>
+                        </div>
+
+                        <p>The URL can be a hostname (relay.envctl.dev) or a full WebSocket URL (wss://relay.envctl.dev/ws).</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project relay set relay.envctl.dev
+<span class="success">✓</span> Relay configured for myapp
+  URL: wss://relay.envctl.dev/ws</code></pre>
+
+                        <p><strong>Related:</strong> <a href="/docs/guides/relay.html">Relay guide</a></p>
+                    </div>
+
+                    <div class="docs-command" id="relay-status">
+                        <h3>envctl project relay status</h3>
+                        <p>Show relay connection status.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl project relay status</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl project relay status
+<span class="dim">Relay Status for myapp:</span>
+
+  URL: wss://relay.envctl.dev/ws
+  Status: <span class="success">connected</span>
+  Last message: 2 minutes ago</code></pre>
+                    </div>
+                </section>
+
+                <!-- Daemon Commands -->
+                <section class="docs-section" id="daemon">
+                    <h2>Daemon Commands</h2>
+
+                    <div class="docs-command" id="daemon-start">
+                        <h3>envctl daemon start</h3>
+                        <p>Start the background daemon for P2P sync.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon start [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--p2p-port &lt;port&gt;</dt>
+                            <dd>Port for P2P connections (default: 7834)</dd>
+
+                            <dt>--web-port &lt;port&gt;</dt>
+                            <dd>Port for the web UI (default: 7835)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon start
+<span class="success">✓</span> Daemon started (PID 12345)
+  P2P port: 7834
+  Web UI: http://localhost:7835</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="daemon-stop">
+                        <h3>envctl daemon stop</h3>
+                        <p>Stop the running daemon.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon stop</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon stop
+<span class="success">✓</span> Daemon stopped</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="daemon-run">
+                        <h3>envctl daemon run</h3>
+                        <p>Run the daemon in the foreground (useful for debugging).</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon run [flags]</code>
+                        </div>
+
+                        <p>Unlike <code>daemon start</code>, this runs the daemon in the foreground and logs to stderr. Press Ctrl+C to stop.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--p2p-port &lt;port&gt;</dt>
+                            <dd>Port for P2P connections (default: 7834)</dd>
+
+                            <dt>--web-port &lt;port&gt;</dt>
+                            <dd>Port for the web UI (default: 7835)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon run
+INFO  Starting daemon...
+INFO  P2P listening on :7834
+INFO  Web UI at http://localhost:7835
+^C
+INFO  Shutting down...</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="daemon-status">
+                        <h3>envctl daemon status</h3>
+                        <p>Show the status of the running daemon.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon status [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--json</dt>
+                            <dd>Output status as JSON</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon status
+Daemon Status:
+  Running: yes
+  PID: 12345
+  Uptime: 2h 15m
+  Identity: alice-macbook
+  P2P Address: :7834
+  Connected Peers: 2
+  Projects: 3</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="daemon-env">
+                        <h3>envctl daemon env</h3>
+                        <p>Print shell commands to set up the daemon socket.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon env</code>
+                        </div>
+
+                        <p>Outputs export commands for your shell. Useful for scripts that need to communicate with the daemon.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon env
+export ENVCTL_SOCKET=/Users/alice/.config/envctl/envctl.sock
+
+<span class="prompt">$</span> eval "$(envctl daemon env)"</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="daemon-install">
+                        <h3>envctl daemon install</h3>
+                        <p>Install the daemon as a system service (launchd on macOS, systemd on Linux).</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon install</code>
+                        </div>
+
+                        <p>Configures the daemon to start automatically when you log in.</p>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon install
+<span class="success">✓</span> Installed launch agent
+<span class="success">✓</span> Daemon will start automatically on login
+
+<span class="dim"># To start now:</span>
+<span class="prompt">$</span> envctl daemon start</code></pre>
+
+                        <p><strong>Related:</strong> <a href="#daemon-uninstall">daemon uninstall</a></p>
+                    </div>
+
+                    <div class="docs-command" id="daemon-uninstall">
+                        <h3>envctl daemon uninstall</h3>
+                        <p>Remove the daemon from system services.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl daemon uninstall</code>
+                        </div>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl daemon uninstall
+<span class="success">✓</span> Stopped daemon
+<span class="success">✓</span> Removed launch agent</code></pre>
+                    </div>
+                </section>
+
+                <!-- CI Commands -->
+                <section class="docs-section" id="ci">
+                    <h2>CI Commands</h2>
+                    <p>Commands for CI/CD pipeline integration. <code>keygen</code> and <code>export</code> require the daemon to be running (they interact with the team chain). <code>apply</code> is standalone and designed for CI runners—no daemon or identity required.</p>
+
+                    <div class="docs-command" id="ci-keygen">
+                        <h3>envctl ci keygen</h3>
+                        <p>Generate a keypair for CI/CD pipelines.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl ci keygen [flags]</code>
+                        </div>
+
+                        <p>Creates a CI-specific keypair. The public key is stored on the project's team chain and automatically synced to all team members. The private key is shown once—store it in your CI platform's secrets. Requires the daemon to be running.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-f, --force</dt>
+                            <dd>Replace existing CI key</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl ci keygen
+Generated CI keypair for project "myapp"
+
+Public key stored on project chain (committed)
+
+CI Private Key (store in your CI platform's secrets as ENVCTL_CI_KEY):
+
+Kz4xN2U5...base64...
+
+<span class="warning">This private key will NOT be shown again.</span></code></pre>
+
+                        <p><strong>Related:</strong> <a href="/docs/guides/ci-cd.html">CI/CD guide</a></p>
+                    </div>
+
+                    <div class="docs-command" id="ci-export">
+                        <h3>envctl ci export</h3>
+                        <p>Export an encrypted bundle for CI pipelines.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl ci export [flags]</code>
+                        </div>
+
+                        <p>Encrypts your environment variables using the project's CI public key (from the team chain). Requires the daemon to be running. You'll be prompted for your identity passphrase.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-e, --env &lt;name&gt;</dt>
+                            <dd>Environment to export (default: dev)</dd>
+
+                            <dt>-o, --output &lt;file&gt;</dt>
+                            <dd>Output file (default: stdout)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc
+Passphrase:
+Exported 8 variables to .envctl/prod.enc
+
+<span class="prompt">$</span> git add .envctl/prod.enc
+<span class="prompt">$</span> git commit -m "Update CI secrets"</code></pre>
+                    </div>
+
+                    <div class="docs-command" id="ci-apply">
+                        <h3>envctl ci apply</h3>
+                        <p>Run a command with secrets decrypted from a CI bundle.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl ci apply [flags] -- &lt;command&gt;</code>
+                        </div>
+
+                        <p>Designed for CI runners. Decrypts the bundle using the CI private key from an environment variable and injects secrets into the command's environment. No daemon or identity required—just the bundle file and the CI private key.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>-b, --bundle &lt;file&gt;</dt>
+                            <dd>Path to encrypted bundle (default: .envctl/secrets.enc)</dd>
+
+                            <dt>--key-env &lt;var&gt;</dt>
+                            <dd>Environment variable containing CI private key (default: ENVCTL_CI_KEY)</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="dim"># In GitHub Actions</span>
+- name: Run tests
+  env:
+    ENVCTL_CI_KEY: ${{ secrets.ENVCTL_CI_KEY }}
+  run: envctl ci apply -b .envctl/prod.enc -- npm test</code></pre>
+                    </div>
+                </section>
+
+                <!-- Utility Commands -->
+                <section class="docs-section" id="utility">
+                    <h2>Utility Commands</h2>
+
+                    <div class="docs-command" id="doctor">
+                        <h3>envctl doctor</h3>
+                        <p>Run health checks to diagnose issues.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl doctor [flags]</code>
+                        </div>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--fix</dt>
+                            <dd>Attempt to fix issues automatically</dd>
+                        </dl>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl doctor
+<span class="success">✓</span> Identity configured
+<span class="success">✓</span> Daemon running (PID 12345)
+<span class="success">✓</span> P2P port 7834 accessible
+<span class="warning">!</span> Relay not configured
+
+All checks passed (1 warning)</code></pre>
+
+                        <p><strong>Related:</strong> <a href="/docs/troubleshooting.html">Troubleshooting</a></p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Global Options</h2>
+
+                    <p>These options are available on all commands:</p>
+
+                    <dl class="docs-command-options">
+                        <dt>-p, --project &lt;name&gt;</dt>
+                        <dd>Override the project (useful when not in a project directory)</dd>
+
+                        <dt>--help</dt>
+                        <dd>Show help for the command</dd>
+
+                        <dt>--version</dt>
+                        <dd>Show envctl version</dd>
+                    </dl>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

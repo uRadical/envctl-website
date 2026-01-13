@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Troubleshooting — envctl Documentation</title>
+    <meta name="title" content="Troubleshooting — envctl Documentation">
+    <meta name="description" content="Solutions to common envctl problems: error messages, sync issues, daemon problems, and how to use envctl doctor for diagnostics.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/troubleshooting.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/troubleshooting.html">
+    <meta property="og:title" content="Troubleshooting — envctl Documentation">
+    <meta property="og:description" content="Solutions to common envctl problems.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html" class="active">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Troubleshooting</h1>
+                    <p class="docs-lead">Solutions to common problems and how to diagnose issues with envctl.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Using envctl doctor</h2>
+
+                    <p>The <code>doctor</code> command checks your envctl setup and identifies problems:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl doctor
+<span class="success">✓</span> envctl version 1.0.0
+<span class="success">✓</span> Identity configured (alice-macbook)
+<span class="success">✓</span> Daemon running (PID 12345)
+<span class="success">✓</span> P2P port 7834 accessible
+<span class="warning">!</span> Relay not configured
+<span class="success">✓</span> Project 'myapp' found
+
+All checks passed (1 warning)</code></pre>
+
+                    <h3>Auto-Fix</h3>
+
+                    <p>Use <code>--fix</code> to automatically resolve some issues:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl doctor --fix
+<span class="success">✓</span> Identity configured
+<span class="error">✗</span> Stale socket file found
+  <span class="success">✓</span> Removed stale socket
+<span class="success">✓</span> Daemon started</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Common Error Messages</h2>
+
+                    <h3>"No identity found"</h3>
+
+                    <p><strong>Cause:</strong> You haven't initialized your identity yet.</p>
+
+                    <p><strong>Solution:</strong></p>
+                    <pre><code><span class="prompt">$</span> envctl init</code></pre>
+
+                    <h3>"Invalid passphrase"</h3>
+
+                    <p><strong>Cause:</strong> The passphrase you entered doesn't match the one used to encrypt your identity.</p>
+
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Try your passphrase again carefully</li>
+                        <li>Check if caps lock is on</li>
+                        <li>If you've forgotten it, recover from your paper backup:
+                            <pre><code><span class="prompt">$</span> envctl identity recover</code></pre>
+                        </li>
+                    </ul>
+
+                    <h3>"Not in an envctl project"</h3>
+
+                    <p><strong>Cause:</strong> The current directory doesn't have a <code>.envctl/</code> folder.</p>
+
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Navigate to a directory with an envctl project</li>
+                        <li>Create a new project: <code>envctl project create</code></li>
+                        <li>Link an existing project: <code>envctl join &lt;invite-code&gt;</code></li>
+                        <li>Use the <code>--project</code> flag to specify a project</li>
+                    </ul>
+
+                    <h3>"Daemon not running"</h3>
+
+                    <p><strong>Cause:</strong> The background daemon isn't started.</p>
+
+                    <p><strong>Solution:</strong></p>
+                    <pre><code><span class="prompt">$</span> envctl daemon start</code></pre>
+
+                    <h3>"Port 7834 already in use"</h3>
+
+                    <p><strong>Cause:</strong> Another process is using the P2P port, or a previous daemon instance didn't shut down cleanly.</p>
+
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li>Check for existing daemon:
+                            <pre><code><span class="prompt">$</span> envctl daemon status</code></pre>
+                        </li>
+                        <li>Stop the daemon:
+                            <pre><code><span class="prompt">$</span> envctl daemon stop</code></pre>
+                        </li>
+                        <li>If that doesn't work, find and kill the process:
+                            <pre><code><span class="prompt">$</span> lsof -i :7834
+<span class="prompt">$</span> kill &lt;PID&gt;</code></pre>
+                        </li>
+                        <li>Use a different port:
+                            <pre><code><span class="prompt">$</span> envctl daemon start --p2p-port 7835</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>"No YubiKey found"</h3>
+
+                    <p><strong>Cause:</strong> Your YubiKey isn't connected or the smart card service isn't running.</p>
+
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Ensure the YubiKey is properly inserted</li>
+                        <li>On Linux, start the smart card daemon:
+                            <pre><code><span class="prompt">$</span> sudo systemctl start pcscd</code></pre>
+                        </li>
+                        <li>Try removing and reinserting the YubiKey</li>
+                    </ul>
+
+                    <h3>"Invalid invite code"</h3>
+
+                    <p><strong>Cause:</strong> The invitation code is malformed, expired, or already used.</p>
+
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Ask the inviter to generate a new invitation</li>
+                        <li>Ensure you copied the entire code</li>
+                        <li>Invites expire after 10 minutes by default—request a longer TTL:
+                            <pre><code><span class="prompt">$</span> envctl project invite bob --pubkey ... --ttl 30m</code></pre>
+                        </li>
+                    </ul>
+
+                    <h3>"Invalid key name" (when setting variables)</h3>
+
+                    <p><strong>Cause:</strong> Variable names must be uppercase letters, numbers, and underscores only.</p>
+
+                    <p><strong>Valid names:</strong> <code>API_KEY</code>, <code>DATABASE_URL</code>, <code>AWS_SECRET_ACCESS_KEY</code></p>
+
+                    <p><strong>Invalid names:</strong> <code>api-key</code>, <code>database.url</code>, <code>my secret</code></p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Sync Issues</h2>
+
+                    <h3>Changes Not Syncing to Peers</h3>
+
+                    <ol>
+                        <li><strong>Check daemon status:</strong>
+                            <pre><code><span class="prompt">$</span> envctl daemon status
+<span class="success">✓</span> Daemon running
+  Connected peers: 2</code></pre>
+                        </li>
+                        <li><strong>Check if peers are connected:</strong>
+                            <pre><code><span class="prompt">$</span> envctl status
+<span class="success">✓</span> Synced with 2 peers</code></pre>
+                        </li>
+                        <li><strong>Force a push:</strong>
+                            <pre><code><span class="prompt">$</span> envctl push</code></pre>
+                        </li>
+                        <li><strong>Check relay status</strong> (if using relay):
+                            <pre><code><span class="prompt">$</span> envctl project relay status</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Not Receiving Updates from Peers</h3>
+
+                    <ol>
+                        <li><strong>Pull manually:</strong>
+                            <pre><code><span class="prompt">$</span> envctl pull</code></pre>
+                        </li>
+                        <li><strong>Restart the daemon:</strong>
+                            <pre><code><span class="prompt">$</span> envctl daemon stop
+<span class="prompt">$</span> envctl daemon start</code></pre>
+                        </li>
+                        <li><strong>Verify you have access to the environment</strong>:
+                            <pre><code><span class="prompt">$</span> envctl env list</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Peers Not Discovering Each Other</h3>
+
+                    <p>On the same local network, peers should discover each other via mDNS. If not:</p>
+
+                    <ol>
+                        <li>Check that both machines have the daemon running</li>
+                        <li>Ensure mDNS isn't blocked by firewall</li>
+                        <li>Add peers manually:
+                            <pre><code><span class="prompt">$</span> envctl peers add 192.168.1.100:7834</code></pre>
+                        </li>
+                        <li>Use the relay for remote teams:
+                            <pre><code><span class="prompt">$</span> envctl project relay set relay.envctl.dev</code></pre>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Daemon Problems</h2>
+
+                    <h3>Daemon Won't Start</h3>
+
+                    <ol>
+                        <li><strong>Check for stale socket:</strong>
+                            <pre><code><span class="prompt">$</span> rm ~/.config/envctl/envctl.sock
+<span class="prompt">$</span> envctl daemon start</code></pre>
+                        </li>
+                        <li><strong>Check logs:</strong>
+                            <pre><code><span class="prompt">$</span> envctl log --since 5m --level error</code></pre>
+                        </li>
+                        <li><strong>Run in foreground for debugging:</strong>
+                            <pre><code><span class="prompt">$</span> envctl daemon run</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Daemon Crashes</h3>
+
+                    <ol>
+                        <li><strong>Check system resources</strong> (memory, disk space)</li>
+                        <li><strong>Check logs:</strong>
+                            <pre><code><span class="prompt">$</span> envctl log --level error</code></pre>
+                        </li>
+                        <li><strong>Update envctl:</strong>
+                            <pre><code><span class="prompt">$</span> curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh</code></pre>
+                        </li>
+                        <li><strong>Report the issue</strong> with logs on <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">GitHub</a></li>
+                    </ol>
+
+                    <h3>Daemon Using Too Much Memory</h3>
+
+                    <p>The daemon caches some data for performance. If memory usage is excessive:</p>
+
+                    <ol>
+                        <li>Restart the daemon:
+                            <pre><code><span class="prompt">$</span> envctl daemon stop && envctl daemon start</code></pre>
+                        </li>
+                        <li>Report the issue with details about your project size</li>
+                    </ol>
+                </section>
+
+                <section class="docs-section">
+                    <h2>CI/CD Issues</h2>
+
+                    <h3>"No CI keypair found"</h3>
+
+                    <p><strong>Solution:</strong> Generate a CI keypair (requires the daemon to be running):</p>
+                    <pre><code><span class="prompt">$</span> envctl ci keygen</code></pre>
+                    <p>The public key is automatically stored on the team chain and synced to all project members.</p>
+
+                    <h3>"Invalid CI key" in Pipeline</h3>
+
+                    <p><strong>Causes and solutions:</strong></p>
+                    <ul>
+                        <li><strong>Secret not set:</strong> Add <code>ENVCTL_CI_KEY</code> to your CI platform's secrets</li>
+                        <li><strong>Whitespace in key:</strong> Ensure no extra newlines when copying the key</li>
+                        <li><strong>Wrong key:</strong> The private key must match the public key on the team chain</li>
+                        <li><strong>Key rotated:</strong> If you regenerated the keypair, update the CI secret</li>
+                    </ul>
+
+                    <h3>"Bundle decryption failed"</h3>
+
+                    <p><strong>Cause:</strong> The bundle was encrypted with a different CI key.</p>
+
+                    <p><strong>Solution:</strong> Re-export the bundle with the current key:</p>
+                    <pre><code><span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc
+<span class="prompt">$</span> git add .envctl/prod.enc && git commit -m "Re-export secrets" && git push</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Environment Issues</h2>
+
+                    <h3>.env File Not Written</h3>
+
+                    <ol>
+                        <li><strong>Check permissions</strong> on the directory</li>
+                        <li><strong>Verify you have access</strong> to the environment:
+                            <pre><code><span class="prompt">$</span> envctl env list</code></pre>
+                        </li>
+                        <li><strong>Check if secrets exist:</strong>
+                            <pre><code><span class="prompt">$</span> envctl env var list</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Wrong Secrets Loaded</h3>
+
+                    <ul>
+                        <li><strong>Check current environment:</strong>
+                            <pre><code><span class="prompt">$</span> envctl status</code></pre>
+                        </li>
+                        <li><strong>Check for local overrides:</strong> Look for <code>.env.&lt;environment&gt;</code> files</li>
+                        <li><strong>Use --no-overrides:</strong>
+                            <pre><code><span class="prompt">$</span> envctl env use dev --no-overrides</code></pre>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Getting Help</h2>
+
+                    <h3>Gather Diagnostic Information</h3>
+
+                    <pre><code><span class="dim"># Version info</span>
+<span class="prompt">$</span> envctl version --full
+
+<span class="dim"># Health check</span>
+<span class="prompt">$</span> envctl doctor
+
+<span class="dim"># Recent logs</span>
+<span class="prompt">$</span> envctl log --since 1h --level error
+
+<span class="dim"># Daemon status</span>
+<span class="prompt">$</span> envctl daemon status</code></pre>
+
+                    <h3>Reporting Issues</h3>
+
+                    <p>When reporting an issue on <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">GitHub</a>, include:</p>
+
+                    <ul>
+                        <li>envctl version (<code>envctl version --full</code>)</li>
+                        <li>Operating system and version</li>
+                        <li>Output of <code>envctl doctor</code></li>
+                        <li>Steps to reproduce the issue</li>
+                        <li>Error messages (sanitize any sensitive information)</li>
+                    </ul>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>Don't share secrets</strong></p>
+                        <p>When sharing logs or error messages, make sure to remove any secret values, fingerprints, or other sensitive information.</p>
+                    </div>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

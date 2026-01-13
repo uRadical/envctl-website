@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>CI/CD Integration — envctl Documentation</title>
+    <meta name="title" content="CI/CD Integration — envctl Documentation">
+    <meta name="description" content="Use envctl secrets in CI/CD pipelines. Generate CI keypairs, export encrypted bundles, and configure GitHub Actions, GitLab CI, and other platforms.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/ci-cd.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/ci-cd.html">
+    <meta property="og:title" content="CI/CD Integration — envctl Documentation">
+    <meta property="og:description" content="Use envctl secrets in your CI/CD pipelines.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html" class="active">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>CI/CD Integration</h1>
+                    <p class="docs-lead">Use envctl secrets in your CI/CD pipelines without network calls to external services. Export encrypted bundles to your repository and decrypt them at build time.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>How It Works</h2>
+
+                    <p>Unlike other secrets managers that require your CI to call an API, envctl uses a <strong>GitOps approach</strong>:</p>
+
+                    <ol>
+                        <li>Generate a CI keypair for your project</li>
+                        <li>Export secrets as an encrypted bundle</li>
+                        <li>Commit the bundle to your repository</li>
+                        <li>Decrypt at build time using the CI private key</li>
+                    </ol>
+
+                    <p>Benefits of this approach:</p>
+                    <ul>
+                        <li><strong>Offline builds</strong> — No network calls during CI</li>
+                        <li><strong>Git history = audit trail</strong> — See when secrets changed</li>
+                        <li><strong>Deterministic</strong> — Same commit = same secrets</li>
+                        <li><strong>Fast</strong> — No API latency</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 1: Generate CI Keypair</h2>
+
+                    <p>Run this once per project:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ci keygen
+Generated CI keypair for project "myapp"
+
+Public key stored on project chain (committed)
+
+CI Private Key (store in your CI platform's secrets as ENVCTL_CI_KEY):
+
+Kz4xN2U5YzJkZmEzYjRjNWQ2ZTdmOGE5YjBjMWQyZTNmNGE1YjZjN2Q4ZTlmMGExYjJjM2Q0
+ZTVmNmE3YjhjOWQwZTFmMmEzYjRjNWQ2ZTdmOGE5YjBjMWQyZTNmNGE1YjZjN2Q4ZTlmMGEx
+
+<span class="warning">This private key will NOT be shown again.</span>
+Store it securely in your CI platform now.</code></pre>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>Save the private key immediately</strong></p>
+                        <p>The CI private key is shown only once. Copy it and store it in your CI platform's secrets before continuing.</p>
+                    </div>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Public key is stored on the team chain</strong></p>
+                        <p>The CI public key is automatically stored on the project's team chain and synced to all team members. No need to commit it to the repository.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 2: Export Encrypted Bundle</h2>
+
+                    <p>Export your secrets to an encrypted file:</p>
+
+                    <pre><code><span class="dim"># Export production secrets</span>
+<span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc
+Passphrase:
+Exported 8 variables to .envctl/prod.enc
+
+<span class="dim"># Export staging secrets</span>
+<span class="prompt">$</span> envctl ci export -e staging -o .envctl/staging.enc
+Exported 6 variables to .envctl/staging.enc</code></pre>
+
+                    <p>The bundle is encrypted with the CI public key—only the CI private key can decrypt it. It's safe to commit:</p>
+
+                    <pre><code><span class="prompt">$</span> git add .envctl/*.enc
+<span class="prompt">$</span> git commit -m "Export secrets for CI"
+<span class="prompt">$</span> git push</code></pre>
+
+                    <p>Any project admin can export bundles—they don't need the CI private key.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Step 3: Configure Your CI Platform</h2>
+
+                    <h3>GitHub Actions</h3>
+
+                    <p>Add the CI private key to your repository secrets:</p>
+
+                    <ol>
+                        <li>Go to Settings → Secrets and variables → Actions</li>
+                        <li>Click "New repository secret"</li>
+                        <li>Name: <code>ENVCTL_CI_KEY</code></li>
+                        <li>Value: (paste the private key)</li>
+                    </ol>
+
+                    <p>Then use it in your workflow:</p>
+
+                    <pre><code>name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install envctl
+        run: curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+
+      - name: Run tests with secrets
+        env:
+          ENVCTL_CI_KEY: ${{ secrets.ENVCTL_CI_KEY }}
+        run: envctl ci apply -b .envctl/prod.enc -- npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install envctl
+        run: curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+
+      - name: Deploy with secrets
+        env:
+          ENVCTL_CI_KEY: ${{ secrets.ENVCTL_CI_KEY }}
+        run: envctl ci apply -b .envctl/prod.enc -- ./deploy.sh</code></pre>
+
+                    <h3>GitLab CI</h3>
+
+                    <p>Add the CI private key to your project's CI/CD variables:</p>
+
+                    <ol>
+                        <li>Go to Settings → CI/CD → Variables</li>
+                        <li>Add variable: <code>ENVCTL_CI_KEY</code></li>
+                        <li>Check "Mask variable" and "Protect variable"</li>
+                    </ol>
+
+                    <pre><code>stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  before_script:
+    - curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+  script:
+    - envctl ci apply -b .envctl/staging.enc -- npm test
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  before_script:
+    - curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+  script:
+    - envctl ci apply -b .envctl/prod.enc -- ./deploy.sh</code></pre>
+
+                    <h3>CircleCI</h3>
+
+                    <p>Add <code>ENVCTL_CI_KEY</code> to your project environment variables in the CircleCI dashboard.</p>
+
+                    <pre><code>version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - run:
+          name: Install envctl
+          command: curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+      - run:
+          name: Run tests
+          command: envctl ci apply -b .envctl/staging.enc -- npm test
+
+  deploy:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - run:
+          name: Install envctl
+          command: curl -fsSL https://raw.githubusercontent.com/uradical/envctl/main/install.sh | sh
+      - run:
+          name: Deploy
+          command: envctl ci apply -b .envctl/prod.enc -- ./deploy.sh
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Updating Secrets</h2>
+
+                    <p>When secrets change, re-export the bundle:</p>
+
+                    <pre><code><span class="dim"># Update a secret</span>
+<span class="prompt">$</span> envctl env var set -e prod NEW_API_KEY=sk_live_xyz789
+
+<span class="dim"># Re-export the bundle</span>
+<span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc
+Exported 9 variables to .envctl/prod.enc
+
+<span class="dim"># Commit and push</span>
+<span class="prompt">$</span> git add .envctl/prod.enc
+<span class="prompt">$</span> git commit -m "Rotate API key"
+<span class="prompt">$</span> git push</code></pre>
+
+                    <p>The next CI run will automatically use the new secrets.</p>
+
+                    <h3>Git History as Audit Trail</h3>
+
+                    <p>Your git history shows when secrets changed:</p>
+
+                    <pre><code><span class="prompt">$</span> git log --oneline .envctl/prod.enc
+a1b2c3d Rotate API key after security incident
+d4e5f6a Add STRIPE_WEBHOOK_SECRET
+7g8h9i0 Initial CI secrets export</code></pre>
+
+                    <p>While you can't see the values (they're encrypted), you can see when changes were made and by whom.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Multiple Environments</h2>
+
+                    <p>Export separate bundles for each environment:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ci export -e dev -o .envctl/dev.enc
+<span class="prompt">$</span> envctl ci export -e staging -o .envctl/staging.enc
+<span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc</code></pre>
+
+                    <p>Then use the appropriate bundle in each job:</p>
+
+                    <pre><code>test:
+  script:
+    - envctl ci apply -b .envctl/staging.enc -- npm test
+
+deploy-staging:
+  script:
+    - envctl ci apply -b .envctl/staging.enc -- ./deploy.sh staging
+
+deploy-prod:
+  script:
+    - envctl ci apply -b .envctl/prod.enc -- ./deploy.sh prod</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Rotating the CI Key</h2>
+
+                    <p>If the CI private key is compromised:</p>
+
+                    <ol>
+                        <li>Generate a new keypair:
+                            <pre><code><span class="prompt">$</span> envctl ci keygen --force
+<span class="warning">!</span> This will invalidate existing CI bundles.
+Continue? [y/N] y</code></pre>
+                        </li>
+                        <li>Store the new private key in your CI platform</li>
+                        <li>Re-export all bundles:
+                            <pre><code><span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc
+<span class="prompt">$</span> envctl ci export -e staging -o .envctl/staging.enc</code></pre>
+                        </li>
+                        <li>Commit and push:
+                            <pre><code><span class="prompt">$</span> git add .envctl/
+<span class="prompt">$</span> git commit -m "Rotate CI key"
+<span class="prompt">$</span> git push</code></pre>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Security Considerations</h2>
+
+                    <h3>What's Safe to Commit</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Safe to Commit?</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>.envctl/*.enc</code></td>
+                                <td>Yes</td>
+                                <td>Encrypted bundles</td>
+                            </tr>
+                            <tr>
+                                <td>CI public key</td>
+                                <td>N/A</td>
+                                <td>Stored on team chain, not in repo</td>
+                            </tr>
+                            <tr>
+                                <td>CI private key</td>
+                                <td>No</td>
+                                <td>Store in CI secrets only</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Who Can Export Bundles</h3>
+
+                    <p>Any project admin can export CI bundles. They don't need the CI private key—only the public key (which is stored on the team chain and synced automatically).</p>
+
+                    <h3>Bundle Signatures</h3>
+
+                    <p>Bundles are signed by the exporter's identity. You can verify who exported a bundle:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ci verify .envctl/prod.enc
+Bundle exported by: alice (sha256:7f3a9b2c...)
+Exported at: 2024-03-01 14:30:00
+Variables: 8</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Troubleshooting</h2>
+
+                    <h3>"No CI keypair found"</h3>
+
+                    <p>No CI public key is set for this project. Run <code>envctl ci keygen</code> to generate one (requires the daemon to be running).</p>
+
+                    <h3>"Invalid CI key"</h3>
+
+                    <p>The <code>ENVCTL_CI_KEY</code> environment variable doesn't match the public key on the team chain. Check that:</p>
+                    <ul>
+                        <li>The secret is set correctly in your CI platform</li>
+                        <li>No extra whitespace or newlines in the key</li>
+                        <li>The key matches the current CI public key on the project chain</li>
+                    </ul>
+
+                    <h3>"Bundle decryption failed"</h3>
+
+                    <p>The bundle was encrypted with a different CI key. Re-export the bundle:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ci export -e prod -o .envctl/prod.enc</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/commands.html#ci">Command Reference: CI commands</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>

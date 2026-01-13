@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Documentation — envctl</title>
+    <meta name="title" content="Documentation — envctl">
+    <meta name="description" content="Learn how to use envctl for P2P secrets management. Installation guides, command reference, and best practices for secure team collaboration.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/">
+    <meta property="og:title" content="Documentation — envctl">
+    <meta property="og:description" content="Learn how to use envctl for P2P secrets management. Installation guides, command reference, and best practices.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar">
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/" class="active">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>envctl Documentation</h1>
+                    <p class="docs-lead">Everything you need to manage secrets with your team using peer-to-peer sync and post-quantum encryption.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>What is envctl?</h2>
+                    <p>envctl is a secrets management tool that works like Git for your environment variables. Instead of storing secrets on a cloud server, envctl encrypts them locally and syncs directly between your team's machines.</p>
+
+                    <p>Key features:</p>
+                    <ul>
+                        <li><strong>No cloud dependency</strong> — Secrets are encrypted on your machine before syncing</li>
+                        <li><strong>P2P sync</strong> — Share directly with teammates, no middleman</li>
+                        <li><strong>Post-quantum encryption</strong> — ML-KEM-768 protects against future quantum attacks</li>
+                        <li><strong>Git-like workflow</strong> — Familiar commands: push, pull, status, log</li>
+                        <li><strong>Offline-first</strong> — Works without network; optional relay for async sync</li>
+                        <li><strong>Built-in rotation workflow</strong> — Guided process when team members leave</li>
+                    </ul>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Quick Links</h2>
+
+                    <div class="docs-cards">
+                        <a href="/docs/getting-started.html" class="docs-card">
+                            <h3>Getting Started</h3>
+                            <p>Install envctl and set up your first project in 5 minutes.</p>
+                        </a>
+
+                        <a href="/docs/concepts.html" class="docs-card">
+                            <h3>Core Concepts</h3>
+                            <p>Understand identities, projects, environments, and how sync works.</p>
+                        </a>
+
+                        <a href="/docs/commands.html" class="docs-card">
+                            <h3>Command Reference</h3>
+                            <p>Complete reference for all envctl commands and options.</p>
+                        </a>
+
+                        <a href="/docs/guides/ci-cd.html" class="docs-card">
+                            <h3>CI/CD Integration</h3>
+                            <p>Use encrypted bundles in your CI pipelines.</p>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Common Tasks</h2>
+
+                    <div class="docs-task-list">
+                        <div class="docs-task">
+                            <h4>Starting a new project</h4>
+                            <p>Create a project and invite your team.</p>
+                            <a href="/docs/getting-started.html">Read the guide →</a>
+                        </div>
+
+                        <div class="docs-task">
+                            <h4>Joining an existing project</h4>
+                            <p>Accept an invitation and sync secrets.</p>
+                            <a href="/docs/guides/team-onboarding.html">Read the guide →</a>
+                        </div>
+
+                        <div class="docs-task">
+                            <h4>Removing a team member</h4>
+                            <p>Revoke access and rotate affected secrets.</p>
+                            <a href="/docs/guides/offboarding.html">Read the guide →</a>
+                        </div>
+
+                        <div class="docs-task">
+                            <h4>Setting up CI/CD</h4>
+                            <p>Export encrypted bundles for your pipelines.</p>
+                            <a href="/docs/guides/ci-cd.html">Read the guide →</a>
+                        </div>
+
+                        <div class="docs-task">
+                            <h4>Managing multiple environments</h4>
+                            <p>Separate dev, staging, and production secrets.</p>
+                            <a href="/docs/guides/environments.html">Read the guide →</a>
+                        </div>
+
+                        <div class="docs-task">
+                            <h4>Enabling async sync</h4>
+                            <p>Use the relay for distributed teams.</p>
+                            <a href="/docs/guides/relay.html">Read the guide →</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Need Help?</h2>
+                    <ul>
+                        <li>Run <code>envctl doctor</code> to diagnose common issues</li>
+                        <li>Check the <a href="/docs/troubleshooting.html">Troubleshooting guide</a> for error solutions</li>
+                        <li>Open an issue on <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
