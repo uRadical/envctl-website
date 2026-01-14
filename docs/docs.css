@@ -25,7 +25,7 @@
 }
 
 .docs-nav-section h3 {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -49,7 +49,7 @@
     color: var(--text-secondary);
     text-decoration: none;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 1.0625rem;
     transition: all 0.15s ease;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .docs-lead {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: var(--text-secondary);
     line-height: 1.6;
 }
@@ -98,19 +98,19 @@
 }
 
 .docs-section h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
     padding-top: 1rem;
 }
 
 .docs-section h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
 }
 
 .docs-section h4 {
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
 }
@@ -119,6 +119,7 @@
     margin-bottom: 1rem;
     line-height: 1.7;
     color: var(--text-secondary);
+    font-size: 1.25rem;
 }
 
 .docs-section ul,
@@ -131,9 +132,20 @@
     margin-bottom: 0.5rem;
     line-height: 1.6;
     color: var(--text-secondary);
+    font-size: 1.25rem;
 }
 
 .docs-section li strong {
+    color: var(--text);
+}
+
+.docs-section li a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.docs-section li a:hover {
     color: var(--text);
 }
 
@@ -154,7 +166,7 @@
     overflow-x: auto;
     margin-bottom: 1rem;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 1.0625rem;
     line-height: 1.5;
 }
 
@@ -188,13 +200,13 @@
 }
 
 .docs-card h3 {
-    font-size: 1.1rem;
+    font-size: 1.375rem;
     margin-bottom: 0.5rem;
     color: var(--text);
 }
 
 .docs-card p {
-    font-size: 0.9rem;
+    font-size: 1.125rem;
     color: var(--text-muted);
     margin: 0;
     line-height: 1.5;
@@ -216,20 +228,20 @@
 
 .docs-task h4 {
     margin: 0 0 0.5rem 0;
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: var(--text);
 }
 
 .docs-task p {
     margin: 0 0 0.75rem 0;
-    font-size: 0.9rem;
+    font-size: 1.125rem;
     color: var(--text-muted);
 }
 
 .docs-task a {
     color: var(--accent);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1.125rem;
 }
 
 .docs-task a:hover {
@@ -241,7 +253,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+    font-size: 1.25rem;
 }
 
 .docs-section th,
@@ -369,7 +381,7 @@
 .docs-command h3 {
     margin-top: 0;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.1rem;
+    font-size: 1.375rem;
 }
 
 .docs-command-synopsis {
@@ -379,24 +391,25 @@
     padding: 1rem 1.25rem;
     margin-bottom: 1rem;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 1.0625rem;
 }
 
 .docs-command-options {
     margin-top: 1rem;
+    margin-left: 1.5rem;
 }
 
 .docs-command-options dt {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 1.0625rem;
     color: var(--accent);
     margin-bottom: 0.25rem;
 }
 
 .docs-command-options dd {
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem 1rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 1.25rem;
 }
 
 /* Prompt styling in code blocks */
@@ -547,6 +560,19 @@
     .docs-content {
         padding: 2rem 1.5rem;
     }
+}
+
+/* Install section overrides for docs */
+.docs-section .install-platforms {
+    margin-bottom: 0.5rem;
+}
+
+.docs-section .install-platform {
+    padding: 0.75rem;
+}
+
+.docs-section .install-instructions {
+    text-align: left;
 }
 
 @media (max-width: 640px) {
