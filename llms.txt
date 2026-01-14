@@ -1,0 +1,94 @@
+# envctl
+
+> Git for your secrets.
+
+envctl is a peer-to-peer secrets management CLI for development teams. It enables secure sharing of environment variables and secrets without requiring cloud accounts or complex infrastructure.
+
+## Key Features
+
+- **P2P Sync**: Secrets sync directly between teammates over the internet. No central server required.
+- **Post-Quantum Encryption**: Uses ML-KEM-768 encryption to protect secrets against future quantum attacks.
+- **Signed Audit Trail**: Every change is cryptographically signed. Know who changed what, and when.
+- **Git-like Workflow**: Familiar commands (push, pull, status, log) with branch-like environments for dev, staging, prod.
+- **Zero Trust**: Secrets never leave your hardware unencrypted. No cloud storage, no SaaS dependencies.
+- **Optional Relay**: For async sync when teammates are offline. The relay only sees encrypted blobs.
+
+## Installation
+
+```bash
+go install envctl.dev/go/envctl@latest
+```
+
+## Quick Start
+
+```bash
+# Generate your identity
+envctl init
+
+# Create a project
+envctl project create
+
+# Add secrets
+envctl env var set API_KEY=sk_live_...
+
+# Invite teammates
+envctl project invite alice@example.com
+
+# Use secrets (writes .env file)
+envctl env use prod
+```
+
+## Common Commands
+
+- `envctl init` - Generate identity
+- `envctl project create` - Create project
+- `envctl join` - Join existing project
+- `envctl env var set KEY=val` - Add or update secret
+- `envctl env var delete KEY` - Remove secret
+- `envctl env var list` - Show secrets
+- `envctl env use <env>` - Write .env file
+- `envctl env create <name>` - Create environment
+- `envctl env delete <name>` - Delete environment
+- `envctl status` - Show sync status
+- `envctl log` - View history
+- `envctl project invite` - Invite teammate
+- `envctl project relay set <url>` - Enable relay sync
+- `envctl daemon start` - Start background daemon
+
+## Environments
+
+Projects support multiple environments (dev, staging, prod) with separate secrets. Team members can have access to specific environments.
+
+## Relay Server
+
+The optional relay enables async sync when teammates are offline. Messages are stored encrypted and delivered when peers come online. The relay never sees unencrypted secrets.
+
+Public relay: `wss://relay.envctl.dev/ws`
+
+## Pricing
+
+- **Free**: Public relay, 7-day retention, rate limited
+- **Pro** ($12/month): 30-day retention, no rate limits, priority sync
+- **Enterprise**: Dedicated relay, unlimited retention, self-hosting option
+
+## Comparison
+
+Unlike Doppler, Infisical, HashiCorp Vault, or 1Password:
+- No cloud account required (without self-hosting overhead)
+- True P2P sync - no server needed for basic use
+- Post-quantum encryption (ML-KEM-768)
+- No per-seat pricing for the CLI
+- Git-like CLI workflow
+
+## Links
+
+- Website: https://envctl.dev
+- GitHub: https://github.com/uradical/envctl
+- Documentation: https://github.com/uradical/envctl#readme
+
+## Contact
+
+- Enterprise sales: sales@envctl.dev
+- Issues: https://github.com/uradical/envctl/issues
+
+Built by uRadical (https://uradical.io)
