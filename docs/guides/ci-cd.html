@@ -419,6 +419,14 @@ Continue? [y/N] y</code></pre>
                         </tbody>
                     </table>
 
+                    <h3>Build Log Protection</h3>
+
+                    <p>By default, <code>envctl ci apply</code> automatically redacts secret values from stdout and stderr, preventing accidental disclosure in build logs. If a command outputs a secret value, it appears as <code>[REDACTED]</code>.</p>
+
+                    <p>Use <code>--raw</code> to disable redaction if needed (e.g., for binary output or debugging):</p>
+
+                    <pre><code>envctl ci apply --raw -b .envctl/prod.enc -- ./binary-tool</code></pre>
+
                     <h3>Who Can Export Bundles</h3>
 
                     <p>Any project admin can export CI bundles. They don't need the CI private key—only the public key (which is stored on the team chain and synced automatically).</p>
