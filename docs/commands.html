@@ -99,6 +99,7 @@
                         <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
                         <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
                         <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/web-ui.html">Web UI</a></li>
                         <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
                         <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
                         <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
@@ -126,7 +127,7 @@
                         <li><a href="#relay">Relay Commands</a> — relay set, relay status</li>
                         <li><a href="#daemon">Daemon Commands</a> — start, stop, run, status, env, install, uninstall</li>
                         <li><a href="#ci">CI Commands</a> — keygen, export, apply</li>
-                        <li><a href="#utility">Utility Commands</a> — doctor</li>
+                        <li><a href="#utility">Utility Commands</a> — doctor, ui</li>
                     </ul>
                 </nav>
 
@@ -1267,6 +1268,40 @@ Exported 8 variables to .envctl/prod.enc
 All checks passed (1 warning)</code></pre>
 
                         <p><strong>Related:</strong> <a href="/docs/troubleshooting.html">Troubleshooting</a></p>
+                    </div>
+
+                    <div class="docs-command" id="ui">
+                        <h3>envctl ui</h3>
+                        <p>Open the envctl web UI in your default browser.</p>
+
+                        <div class="docs-command-synopsis">
+                            <code>envctl ui [flags]</code>
+                        </div>
+
+                        <p>The web UI provides a visual interface for managing your projects and team. The daemon must be running.</p>
+
+                        <h4>Options</h4>
+                        <dl class="docs-command-options">
+                            <dt>--no-open</dt>
+                            <dd>Print the URL instead of opening the browser</dd>
+                        </dl>
+
+                        <h4>Features</h4>
+                        <ul>
+                            <li><strong>Project members</strong> — View all members and their roles</li>
+                            <li><strong>Pending requests</strong> — Approve or deny join requests and proposals</li>
+                            <li><strong>Connected peers</strong> — See who's currently online</li>
+                            <li><strong>Audit log</strong> — Review recent activity and changes</li>
+                        </ul>
+
+                        <h4>Examples</h4>
+                        <pre><code><span class="prompt">$</span> envctl ui
+Opening http://localhost:7835 in browser...
+
+<span class="prompt">$</span> envctl ui --no-open
+http://localhost:7835</code></pre>
+
+                        <p><strong>Related:</strong> <a href="/docs/guides/web-ui.html">Web UI Guide</a></p>
                     </div>
                 </section>
 
