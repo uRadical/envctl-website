@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Web UI — envctl Documentation</title>
+    <meta name="title" content="Web UI — envctl Documentation">
+    <meta name="description" content="Use the envctl web UI to manage project members, approve requests, view connected peers, and review the audit log.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://envctl.dev/docs/guides/web-ui.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://envctl.dev/docs/guides/web-ui.html">
+    <meta property="og:title" content="Web UI — envctl Documentation">
+    <meta property="og:description" content="Use the envctl web UI to manage your team and projects.">
+    <meta property="og:image" content="https://envctl.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-UeMDaNQG.svg">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+    <link rel="stylesheet" href="/docs/docs.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-BhBew_en.css">
+</head>
+<body>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-logo" aria-label="envctl home">
+            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%20fill='none'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'/%3e%3c!--%20Lock%20body%20--%3e%3crect%20x='10'%20y='14'%20width='12'%20height='10'%20rx='2'%20fill='%2322c55e'/%3e%3c!--%20Lock%20shackle%20--%3e%3cpath%20d='M12%2014V11a4%204%200%200%201%208%200v3'%20stroke='%2322c55e'%20stroke-width='1.5'%20fill='none'%20stroke-linecap='round'/%3e%3c!--%20Keyhole%20--%3e%3ccircle%20cx='16'%20cy='18'%20r='1.5'%20fill='%230a0a0b'/%3e%3crect%20x='15'%20y='18'%20width='2'%20height='3'%20fill='%230a0a0b'/%3e%3c/svg%3e" alt="" width="32" height="32" aria-hidden="true">
+            <span>envctl</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#features">Features</a>
+            <a href="/#install">Install</a>
+            <a href="/docs/" class="active">Docs</a>
+            <a href="/#pricing">Pricing</a>
+            <a href="https://github.com/uradical/envctl" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button class="docs-mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="docs-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="docs-sidebar-header">
+                <h2>Documentation</h2>
+                <button class="docs-sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="docs-nav">
+                <div class="docs-nav-section">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="/docs/">Documentation Home</a></li>
+                        <li><a href="/docs/getting-started.html">Installation & Setup</a></li>
+                        <li><a href="/docs/concepts.html">Core Concepts</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Reference</h3>
+                    <ul>
+                        <li><a href="/docs/commands.html">Command Reference</a></li>
+                        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+                    </ul>
+                </div>
+
+                <div class="docs-nav-section">
+                    <h3>Guides</h3>
+                    <ul>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/offboarding.html">Team Offboarding</a></li>
+                        <li><a href="/docs/guides/environments.html">Multiple Environments</a></li>
+                        <li><a href="/docs/guides/ci-cd.html">CI/CD Integration</a></li>
+                        <li><a href="/docs/guides/relay.html">Using the Relay</a></li>
+                        <li><a href="/docs/guides/web-ui.html" class="active">Web UI</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a></li>
+                        <li><a href="/docs/guides/shell.html">Shell Integration</a></li>
+                        <li><a href="/docs/guides/security.html">Security Best Practices</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <article class="docs-article">
+                <header class="docs-header">
+                    <h1>Web UI</h1>
+                    <p class="docs-lead">Manage your envctl projects through a visual web interface. View team members, approve requests, monitor peers, and review the audit log.</p>
+                </header>
+
+                <section class="docs-section">
+                    <h2>Opening the Web UI</h2>
+
+                    <p>The web UI is served by the envctl daemon. To open it:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ui
+Opening http://localhost:7835 in browser...</code></pre>
+
+                    <p>This opens the web UI in your default browser. If you prefer to get the URL without opening a browser:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ui --no-open
+http://localhost:7835</code></pre>
+
+                    <div class="docs-callout docs-callout-info">
+                        <p><strong>Prerequisite</strong></p>
+                        <p>The envctl daemon must be running. Start it with <code>envctl daemon start</code> if needed.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Features</h2>
+
+                    <h3>Project Members</h3>
+
+                    <p>View all members of your project and their access levels:</p>
+
+                    <ul>
+                        <li><strong>Name and fingerprint</strong> — Identify each team member</li>
+                        <li><strong>Role</strong> — Admin, member, or reader</li>
+                        <li><strong>Environment access</strong> — Which environments each member can access</li>
+                        <li><strong>Online status</strong> — See who's currently connected</li>
+                    </ul>
+
+                    <h3>Pending Requests</h3>
+
+                    <p>Manage proposals that require approval:</p>
+
+                    <ul>
+                        <li><strong>Join requests</strong> — New members waiting to be added</li>
+                        <li><strong>Access changes</strong> — Requests for additional environment access</li>
+                        <li><strong>Role changes</strong> — Proposals to change member roles</li>
+                        <li><strong>Removal requests</strong> — Proposals to remove team members</li>
+                    </ul>
+
+                    <p>Click a request to see details and approve or deny it directly from the UI.</p>
+
+                    <h3>Connected Peers</h3>
+
+                    <p>Monitor your P2P network:</p>
+
+                    <ul>
+                        <li><strong>Online peers</strong> — Team members currently connected</li>
+                        <li><strong>Connection type</strong> — Direct P2P or via relay</li>
+                        <li><strong>Sync status</strong> — Whether you're up to date with each peer</li>
+                    </ul>
+
+                    <h3>Audit Log</h3>
+
+                    <p>Review recent activity in your project:</p>
+
+                    <ul>
+                        <li><strong>Secret changes</strong> — Variables set, updated, or deleted</li>
+                        <li><strong>Membership changes</strong> — Members added or removed</li>
+                        <li><strong>Access changes</strong> — Environment permissions granted or revoked</li>
+                        <li><strong>Sync events</strong> — When data was exchanged with peers</li>
+                    </ul>
+
+                    <p>Each entry shows who made the change and when.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>When to Use the Web UI</h2>
+
+                    <p>The web UI is especially useful for:</p>
+
+                    <ul>
+                        <li><strong>Team management</strong> — Easier to see member roles and access at a glance</li>
+                        <li><strong>Approving requests</strong> — Visual review of pending proposals</li>
+                        <li><strong>Debugging sync issues</strong> — See which peers are connected</li>
+                        <li><strong>Auditing</strong> — Review who changed what and when</li>
+                    </ul>
+
+                    <p>For day-to-day secret management (setting variables, switching environments), the CLI or VS Code extension are typically faster.</p>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Security</h2>
+
+                    <p>The web UI runs locally and is only accessible from your machine:</p>
+
+                    <ul>
+                        <li>Served on <code>localhost</code> only (not exposed to the network)</li>
+                        <li>Communicates with the daemon over a local socket</li>
+                        <li>No data is sent to external servers</li>
+                    </ul>
+
+                    <div class="docs-callout docs-callout-warning">
+                        <p><strong>Local access only</strong></p>
+                        <p>The web UI is designed for local use. Don't expose port 7835 to the network or proxy it externally.</p>
+                    </div>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Troubleshooting</h2>
+
+                    <h3>"Connection refused"</h3>
+
+                    <p>The daemon isn't running. Start it:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl daemon start</code></pre>
+
+                    <h3>Browser doesn't open</h3>
+
+                    <p>Use <code>--no-open</code> and open the URL manually:</p>
+
+                    <pre><code><span class="prompt">$</span> envctl ui --no-open
+http://localhost:7835</code></pre>
+
+                    <h3>Page shows "No project"</h3>
+
+                    <p>Navigate to a directory containing an envctl project, or the daemon was started from a directory without a project. Restart the daemon from your project directory:</p>
+
+                    <pre><code><span class="prompt">$</span> cd /path/to/your/project
+<span class="prompt">$</span> envctl daemon stop
+<span class="prompt">$</span> envctl daemon start</code></pre>
+                </section>
+
+                <section class="docs-section">
+                    <h2>Related</h2>
+
+                    <ul>
+                        <li><a href="/docs/commands.html#ui">Command Reference: envctl ui</a></li>
+                        <li><a href="/docs/commands.html#daemon">Daemon Commands</a></li>
+                        <li><a href="/docs/guides/team-onboarding.html">Team Onboarding</a></li>
+                        <li><a href="/docs/guides/vscode.html">VS Code Extension</a> — Alternative visual interface</li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/uradical/envctl" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/uradical/envctl/issues" target="_blank" rel="noopener">Issues</a>
+                <a href="https://github.com/uradical/envctl/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 uRadical.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/docs/mobile-nav.js"></script>
+</body>
+</html>
